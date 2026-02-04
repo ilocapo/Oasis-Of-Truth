@@ -1,0 +1,71 @@
+<!-- Reusable Header Component -->
+<header class="app-header">
+  <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+    <!-- simple SVG hamburger (stroke-based so colors editable via CSS) -->
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M3 7h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M3 17h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <div class="header-title">Oasis of Truth</div>
+
+  <div class="header-actions">
+    <button class="profile-btn" id="profileBtn" aria-label="Open profile">
+      <div class="profile-icon" id="profileIcon">U</div>
+    </button>
+  </div>
+
+  <!-- slide-in nav (hidden by default) -->
+  <nav class="slide-nav" id="slideNav" aria-hidden="true">
+    <ul>
+      <li><a href="/pages/dashboard.html">Dashboard</a></li>
+      <li><a href="/pages/profile.html">Profile</a></li>
+      <li><a href="/pages/commitmentpage.html">Commitment</a></li>
+      <li><a href="/pages/statistics.html">Statistics</a></li>
+      <li><a href="/pages/parametes.html">Settings</a></li>
+      <li><a href="/index.html">Home</a></li>
+    </ul>
+  </nav>
+
+  <div class="profile-menu" id="profileMenu" aria-hidden="true">
+    <a href="/pages/profile.html">View Profile</a>
+    <a href="/pages/welcoming/login.html">Log out</a>
+  </div>
+
+  <script>
+    (function(){
+      const hamburger = document.getElementById('hamburgerBtn');
+      const slideNav = document.getElementById('slideNav');
+      const profileBtn = document.getElementById('profileBtn');
+      const profileMenu = document.getElementById('profileMenu');
+
+      if(hamburger){
+        hamburger.addEventListener('click', () => {
+          const open = slideNav.classList.toggle('active');
+          slideNav.setAttribute('aria-hidden', String(!open));
+        });
+      }
+
+      if(profileBtn){
+        profileBtn.addEventListener('click', () => {
+          const open = profileMenu.classList.toggle('active');
+          profileMenu.setAttribute('aria-hidden', String(!open));
+        });
+      }
+
+      // close when clicking outside
+      document.addEventListener('click', (e) => {
+        if(!slideNav.contains(e.target) && !hamburger.contains(e.target)){
+          slideNav.classList.remove('active');
+          slideNav.setAttribute('aria-hidden', 'true');
+        }
+        if(!profileMenu.contains(e.target) && !profileBtn.contains(e.target)){
+          profileMenu.classList.remove('active');
+          profileMenu.setAttribute('aria-hidden', 'true');
+        }
+      });
+    })();
+  </script>
+</header>

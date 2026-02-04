@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#2b003b">
+  <title>Settings - Oasis of Truth</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Crimson+Text:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Fira+Code:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Flaticon Uicons (local) -->
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-rounded-regular.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-regular-rounded.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-regular-straight.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-solid-rounded.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-solid-straight.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-thin-rounded.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-brands.css">
+
+  <style>
+    :root {
+      /* Default Theme (Violet) */
+      --primary-500: #2b003b;
+      --primary-600: #7c3aed;
+      --primary-700: #6d28d9;
+      --primary-100: #f3e8ff;
+      --primary-50: #faf5ff;
+      
+      /* Font families */
+      --font-body: 'Inter', sans-serif;
+      --font-heading: 'Playfair Display', serif;
+      --font-mono: 'Fira Code', monospace;
+      
+      /* Neutral colors */
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-600: #4b5563;
+      --gray-500: #6b7280;
+      --gray-300: #d1d5db;
+      --gray-200: #e5e7eb;
+      --gray-100: #f3f4f6;
+      --gray-50: #f9fafb;
+      
+      /* Semantic colors */
+      --red-500: #ef4444;
+      --red-100: #fee2e2;
+      --green-500: #10b981;
+      --green-100: #d1fae5;
+    }
+
+    /* ========== THEME PALETTES ========== */
+    
+    /* Sober Olive Theme - Luxe & Distinguished */
+    body.theme-olive {
+      --primary-500: #6B8E23;
+      --primary-600: #556B2F;
+      --primary-700: #3D4F1F;
+      --primary-100: #F4EFE6;
+      --primary-50: #FAFAF7;
+      --gray-900: #2F2F2F;
+      --gray-700: #4A4A4A;
+      --gray-600: #5F5F5F;
+      --gray-500: #757575;
+      --font-body: 'Crimson Text', serif;
+      --font-heading: 'Playfair Display', serif;
+      background: linear-gradient(180deg, #FAFAF7, #F4EFE6) !important;
+    }
+
+    /* Lost in Japan Theme - Minimalist Japanese */
+    body.theme-japan {
+      --primary-500: #1F1F1F;
+      --primary-600: #0D0D0D;
+      --primary-700: #000000;
+      --primary-100: #F5F5F5;
+      --primary-50: #FFFFFF;
+      --gray-900: #0D0D0D;
+      --gray-700: #2F2F2F;
+      --gray-600: #4A4A4A;
+      --gray-500: #757575;
+      --font-body: 'Noto Sans JP', sans-serif;
+      --font-heading: 'Zen Kaku Gothic New', sans-serif;
+      background: linear-gradient(180deg, #FFFFFF, #F5F5F5) !important;
+    }
+
+    /* Pixel/Arcade Theme - Retro Gaming */
+    body.theme-pixel {
+      --primary-500: #00FF00;
+      --primary-600: #00DD00;
+      --primary-700: #00BB00;
+      --primary-100: #E6FFE6;
+      --primary-50: #F2FFF2;
+      --gray-900: #000000;
+      --gray-700: #1F1F1F;
+      --gray-600: #3F3F3F;
+      --gray-500: #5F5F5F;
+      --font-body: 'JetBrains Mono', monospace;
+      --font-heading: 'Fira Code', monospace;
+      background: linear-gradient(180deg, #000000, #0F0F0F) !important;
+    }
+    
+    body.theme-pixel * {
+      font-family: 'JetBrains Mono', monospace !important;
+    }
+    
+    body.theme-pixel body {
+      color: #00FF00;
+    }
+
+    /* Dark Theme */
+    body.dark-theme {
+      --gray-900: #f9fafb;
+      --gray-700: #e5e7eb;
+      --gray-600: #d1d5db;
+      --gray-500: #9ca3af;
+      --gray-300: #4b5563;
+      --gray-200: #374151;
+      --gray-100: #1f2937;
+      --gray-50: #111827;
+      background: linear-gradient(180deg, #1f2937, #111827) !important;
+    }
+
+    body.dark-theme .app-header {
+      background: rgba(31, 41, 55, 0.95) !important;
+      border-bottom: 1px solid rgba(75, 85, 99, 0.3) !important;
+    }
+
+    body.dark-theme .slide-nav,
+    body.dark-theme .profile-menu {
+      background: #1f2937 !important;
+    }
+
+    body.dark-theme .settings-section,
+    body.dark-theme .info-card {
+      background: #1f2937 !important;
+    }
+
+    body.dark-theme .setting-item:hover {
+      background: #374151 !important;
+    }
+
+    body.dark-theme .section-title {
+      border-bottom-color: #374151 !important;
+    }
+
+    body.dark-theme .setting-item {
+      border-bottom-color: #374151 !important;
+    }
+
+    /* ================= GLOBAL ================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: linear-gradient(180deg, var(--primary-50), #fff);
+      color: var(--gray-900);
+      min-height: 100vh;
+      transition: background 0.3s ease, color 0.3s ease, font-family 0.3s ease;
+    }
+
+    /* ================= HEADER ================= */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(43, 0, 59, 0.12);
+      transition: all 0.3s ease;
+    }
+
+    .header-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-600);
+      transition: color 0.3s ease, font-family 0.3s ease;
+    }
+
+    .hamburger,
+    .profile-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--primary-600);
+      padding: 4px;
+      transition: color 0.3s ease;
+    }
+
+    .profile-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: var(--primary-600);
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    /* ================= NAVIGATION ================= */
+    .slide-nav {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 260px;
+      height: 100%;
+      background: white;
+      padding: 80px 20px 20px;
+      transition: 0.3s ease;
+      box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+      z-index: 999;
+    }
+
+    .slide-nav.active {
+      left: 0;
+    }
+
+    .slide-nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .slide-nav a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--gray-700);
+      font-size: 0.95rem;
+      padding: 12px 16px;
+      display: block;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
+
+    .slide-nav a:hover {
+      background: var(--primary-50);
+      color: var(--primary-600);
+    }
+
+    /* Profile menu */
+    .profile-menu {
+      position: absolute;
+      top: 56px;
+      right: 16px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+      padding: 8px 0;
+      display: none;
+      min-width: 160px;
+      z-index: 1001;
+    }
+
+    .profile-menu.active {
+      display: block;
+    }
+
+    .profile-menu a {
+      display: block;
+      padding: 10px 16px;
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--gray-700);
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+
+    .profile-menu a:hover {
+      background: var(--primary-50);
+      color: var(--primary-600);
+    }
+
+    /* ========== BOTTOM NAVIGATION (MOBILE) ========== */
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: none;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid rgba(43,0,59,0.06);
+      box-shadow: 0 -6px 24px rgba(0,0,0,0.08);
+      z-index: 1005;
+      padding: env(safe-area-inset-bottom, 12px) 12px 12px;
+    }
+
+    .bottom-nav .nav-row {
+      display: flex;
+      gap: 6px;
+      justify-content: space-around;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .bottom-nav .nav-item {
+      text-decoration: none;
+      color: var(--gray-700);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.8rem;
+      gap: 4px;
+      padding: 8px 6px;
+      border-radius: 10px;
+      transition: background 0.12s, transform 0.12s;
+    }
+
+    .bottom-nav .nav-item .nav-icon {
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .bottom-nav .nav-item.active,
+    .bottom-nav .nav-item:focus,
+    .bottom-nav .nav-item:hover {
+      color: var(--primary-600);
+      transform: translateY(-4px);
+    }
+
+    /* Show bottom nav on small screens and hide hamburger */
+    @media (max-width: 900px) {
+      .bottom-nav { display: block; }
+      .hamburger { display: none; }
+      main { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+    }
+
+    /* ================= CONTENT ================= */
+    main {
+      padding: 20px 16px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .page-title {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 12px;
+      color: var(--gray-900);
+      transition: color 0.3s ease, font-family 0.3s ease;
+    }
+
+    .page-subtitle {
+      text-align: center;
+      color: var(--gray-600);
+      margin-bottom: 32px;
+      font-size: 1rem;
+    }
+
+    /* Settings Section */
+    .settings-section {
+      background: white;
+      border-radius: 16px;
+      padding: 0;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: background 0.3s ease;
+    }
+
+    .section-title {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      transition: all 0.3s ease;
+    }
+
+    .setting-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--gray-100);
+      transition: 0.2s;
+    }
+
+    .setting-item:last-child {
+      border-bottom: none;
+    }
+
+    .setting-item:hover {
+      background: var(--gray-50);
+    }
+
+    .setting-info {
+      flex: 1;
+    }
+
+    .setting-label {
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+
+    .setting-description {
+      font-size: 0.85rem;
+      color: var(--gray-600);
+      line-height: 1.4;
+    }
+
+    .setting-action {
+      margin-left: 16px;
+    }
+
+    /* Theme Preview */
+    .theme-preview {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .theme-option {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .theme-option:hover {
+      transform: scale(1.1);
+      border-color: var(--gray-300);
+    }
+
+    .theme-option.active {
+      border-color: var(--primary-600);
+      box-shadow: 0 0 0 2px var(--primary-100);
+    }
+
+    .theme-option::before {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+      opacity: 0;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .theme-option.active::before {
+      opacity: 1;
+    }
+
+    .theme-default { background: linear-gradient(135deg, #2b003b, #6f2b83); }
+    .theme-olive { background: linear-gradient(135deg, #6B8E23, #8B7355); }
+    .theme-japan { background: linear-gradient(135deg, #1F1F1F, #F5F5F5); border: 2px solid #2F2F2F; }
+    .theme-pixel { background: linear-gradient(135deg, #000000, #00FF00); }
+
+    /* Toggle Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 52px;
+      height: 28px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--gray-300);
+      transition: 0.3s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: 0.3s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--primary-500);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--primary-600);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-700);
+    }
+
+    .btn-danger {
+      background: var(--red-500);
+      color: white;
+    }
+
+    .btn-danger:hover {
+      opacity: 0.9;
+    }
+
+    /* Danger Zone */
+    .danger-zone {
+      background: var(--red-100);
+      border: 2px solid var(--red-500);
+    }
+
+    .danger-zone .section-title {
+      background: var(--red-500);
+      color: white;
+      border-bottom: none;
+    }
+
+    .danger-zone .setting-item:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    /* Info Card */
+    .info-card {
+      background: linear-gradient(135deg, var(--primary-600), var(--primary-500));
+      color: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(124, 58, 237, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .info-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .info-card p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      opacity: 0.95;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (min-width: 600px) {
+      .header-title {
+        font-size: 1.3rem;
+      }
+
+      main {
+        padding: 32px 24px;
+      }
+
+      .page-title {
+        font-size: 2.2rem;
+      }
+
+      .setting-item {
+        padding: 24px;
+      }
+
+      .section-title {
+        padding: 24px;
+      }
+
+      .theme-option {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="app-header">
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
+  <div class="header-title">Oasis of Truth</div>
+  <button class="profile-btn" id="profileBtn" aria-label="Profile">
+    <div class="profile-icon" id="profileIcon">U</div>
+  </button>
+
+  <nav class="slide-nav" id="slideNav">
+    <ul>
+      <li><a href="/pages/dashboard.html">📊 Dashboard</a></li>
+      <li><a href="/pages/profile.html">👤 My profile</a></li>
+      <li><a href="/pages/commitmentpage.html">🎯 My commitments</a></li>
+      <li><a href="/pages/statistics.html">📈 Statistics</a></li>
+      <li><a href="/pages/parametes.html">⚙️ Settings</a></li>
+    </ul>
+  </nav>
+
+  <div class="profile-menu" id="profileMenu">
+    <a href="/pages/profile.html">View profile</a>
+    <a href="/pages/parametes.html">Settings</a>
+    <a href="#" id="logoutBtn">Log out</a>
+  </div>
+</header>
+
+<script src="/assets/js/profile-icon.js"></script>
+
+<main>
+  <h1 class="page-title">Settings</h1>
+  <p class="page-subtitle">Customize your Oasis of Truth experience</p>
+
+  <div class="info-card">
+    <h3>💡 Tip</h3>
+    <p>
+      Enable notifications so you never miss your daily session!
+    </p>
+  </div>
+
+  <div class="settings-section">
+    <div class="section-title">🎨 Color palette</div>
+    
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-label">Choose your theme</div>
+        <div class="setting-description">Select a color palette to personalize the app</div>
+        <div class="theme-preview" id="themePreview">
+          <div class="theme-option theme-default" data-theme="default" title="Classic (Violet)"></div>
+          <div class="theme-option theme-olive" data-theme="olive" title="Sober Olive"></div>
+          <div class="theme-option theme-japan" data-theme="japan" title="Lost in Japan"></div>
+          <div class="theme-option theme-pixel" data-theme="pixel" title="Pixel/Arcade"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <div class="section-title">🔔 Notifications</div>
+    
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-label">Push notifications</div>
+        <div class="setting-description">Receive daily reminders</div>
+      </div>
+      <div class="setting-action">
+        <label class="switch">
+          <input type="checkbox" id="notifToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-label">Daily reminder</div>
+        <div class="setting-description">Remind you of your session every day at 9 AM</div>
+      </div>
+      <div class="setting-action">
+        <label class="switch">
+          <input type="checkbox" id="dailyReminderToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-label">Streak notifications</div>
+        <div class="setting-description">Be notified of streak milestones (5, 10, 15 days...)</div>
+      </div>
+      <div class="setting-action">
+        <label class="switch">
+          <input type="checkbox" id="streakNotifToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <div class="section-title">🌙 Appearance</div>
+    
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-label">Dark mode</div>
+        <div class="setting-description">Switch to a dark interface to reduce eye strain</div>
+      </div>
+      <div class="setting-action">
+        <label class="switch">
+          <input type="checkbox" id="darkToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-label">Animations</div>
+        <div class="setting-description">Enable animations and transitions</div>
+      </div>
+      <div class="setting-action">
+        <label class="switch">
+          <input type="checkbox" id="animationsToggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <div class="section-title">📊 Data & Privacy</div>
+    
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-label">Export my data</div>
+        <div class="setting-description">Download all your data in JSON format</div>
+      </div>
+      <div class="setting-action">
+        <button class="btn btn-primary" id="exportBtn">Export</button>
+      </div>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-label">Reset statistics</div>
+        <div class="setting-description">Reset your statistics (keeps habits)</div>
+      </div>
+      <div class="setting-action">
+        <button class="btn btn-danger" id="resetStatsBtn">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-section danger-zone">
+    <div class="section-title">⚠️ Danger Zone</div>
+    
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-label">Delete all data</div>
+        <div class="setting-description">Permanently erase all your app data</div>
+      </div>
+      <div class="setting-action">
+        <button class="btn btn-danger" id="deleteAllBtn">Delete everything</button>
+      </div>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <div class="setting-label">Delete my account</div>
+        <div class="setting-description">Permanently close your account (irreversible)</div>
+      </div>
+      <div class="setting-action">
+        <button class="btn btn-danger" id="deleteAccountBtn">Delete account</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Bottom Navigation (mobile) -->
+<nav class="bottom-nav" id="bottomNav" role="navigation" aria-label="Bottom navigation">
+  <div class="nav-row">
+    <a href="/pages/dashboard.html" class="nav-item" data-key="dashboard" aria-label="Dashboard">
+      <div class="nav-icon"><i class="fi fi-rr-dashboard"></i></div>
+      <div class="nav-label">Dashboard</div>
+    </a>
+    <a href="/pages/profile.html" class="nav-item" data-key="profile" aria-label="Profile">
+      <div class="nav-icon" id="bottomProfileIcon"></div>
+      <div class="nav-label">Profile</div>
+    </a>
+    <a href="/pages/commitmentpage.html" class="nav-item" data-key="commitments" aria-label="Commitments">
+      <div class="nav-icon"><i class="fi fi-rr-diploma"></i></div>
+      <div class="nav-label">Commitments</div>
+    </a>
+    <a href="/pages/statistics.html" class="nav-item" data-key="statistics" aria-label="Statistics">
+      <div class="nav-icon"><i class="fi fi-rr-chart-pie"></i></div>
+      <div class="nav-label">Stats</div>
+    </a>
+    <a href="/pages/parametes.html" class="nav-item" data-key="settings" aria-label="Settings">
+      <div class="nav-icon"><i class="fi fi-rr-settings"></i></div>
+      <div class="nav-label">Settings</div>
+    </a>
+  </div>
+</nav>
+
+<script>
+  // Highlight active nav item based on current path
+  (function() {
+    const path = window.location.pathname || '';
+    const map = {
+      '/pages/dashboard.html': 'dashboard',
+      '/pages/profile.html': 'profile',
+      '/pages/commitmentpage.html': 'commitments',
+      '/pages/statistics.html': 'statistics',
+      '/pages/parametes.html': 'settings',
+      '/parametes.html': 'settings'
+    };
+
+    const key = map[path] || Object.keys(map).find(k => path.endsWith(k.split('/').pop())) || 'dashboard';
+    document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
+      if (item.dataset.key === key) item.classList.add('active');
+    });
+
+    // Mirror header profile icon if available
+    try {
+      const headerIcon = document.getElementById('profileIcon');
+      const bottomIcon = document.getElementById('bottomProfileIcon');
+      if (headerIcon && bottomIcon) {
+        bottomIcon.innerHTML = headerIcon.innerHTML;
+      }
+    } catch (e) { /* ignore */ }
+  })();
+</script>
+<script>
+// ============= NAVIGATION =============
+const hamburger = document.getElementById('hamburgerBtn');
+const slideNav = document.getElementById('slideNav');
+const profileBtn = document.getElementById('profileBtn');
+const profileMenu = document.getElementById('profileMenu');
+
+hamburger.onclick = () => slideNav.classList.toggle('active');
+profileBtn.onclick = () => profileMenu.classList.toggle('active');
+
+document.addEventListener('click', e => {
+  if (!slideNav.contains(e.target) && !hamburger.contains(e.target)) {
+    slideNav.classList.remove('active');
+  }
+  if (!profileMenu.contains(e.target) && !profileBtn.contains(e.target)) {
+    profileMenu.classList.remove('active');
+  }
+});
+
+// Logout
+document.getElementById('logoutBtn').onclick = (e) => {
+  e.preventDefault();
+  if (confirm('Are you sure you want to log out?')) {
+    localStorage.clear();
+    window.location.href = 'index.html';
+  }
+};
+
+// Set profile icon
+try {
+  const userName = localStorage.getItem('profileName') || 'User';
+  document.getElementById('profileIcon').textContent = userName.charAt(0).toUpperCase();
+} catch (e) {
+  document.getElementById('profileIcon').textContent = 'U';
+}
+
+// ============= THEME MANAGEMENT =============
+function applyTheme() {
+  const theme = localStorage.getItem('colorTheme') || 'default';
+  const dark = localStorage.getItem('darkMode') === '1';
+  
+  // Remove all theme classes
+  const themeClasses = ['theme-ocean', 'theme-forest', 'theme-sunset', 'theme-rose', 
+                        'theme-midnight', 'theme-japan', 'theme-pixel', 'theme-winter', 'theme-summer'];
+  document.body.classList.remove(...themeClasses);
+  
+  // Apply selected theme
+  if (theme !== 'default') {
+    document.body.classList.add('theme-' + theme);
+  }
+  
+  // Apply dark mode
+  document.body.classList.toggle('dark-theme', dark);
+  
+  // Update theme preview active state
+  document.querySelectorAll('.theme-option').forEach(option => {
+    option.classList.toggle('active', option.dataset.theme === theme);
+  });
+}
+
+// Theme selection
+document.querySelectorAll('.theme-option').forEach(option => {
+  option.addEventListener('click', function() {
+    const theme = this.dataset.theme;
+    localStorage.setItem('colorTheme', theme);
+    applyTheme();
+    
+    // Visual feedback
+    const themeNames = {
+      default: 'Classic',
+      olive: 'Sober Olive',
+      japan: 'Lost in Japan',
+      pixel: 'Pixel/Arcade'
+    };
+    
+    // Show a subtle notification
+    const notification = document.createElement('div');
+    notification.textContent = `✓ Theme "${themeNames[theme]}" applied`;
+    notification.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary-600);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 10000;
+      animation: slideIn 0.3s ease;
+    `;
+    document.body.appendChild(notification);
+    setTimeout(() => {
+      notification.style.animation = 'slideOut 0.3s ease';
+      setTimeout(() => notification.remove(), 300);
+    }, 2000);
+  });
+});
+
+// Add animations
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+  }
+`;
+document.head.appendChild(style);
+
+// ============= SETTINGS MANAGEMENT =============
+function loadSettings() {
+  document.getElementById('notifToggle').checked = 
+    localStorage.getItem('notif') === '1';
+  
+  document.getElementById('dailyReminderToggle').checked = 
+    localStorage.getItem('dailyReminder') === '1';
+  
+  document.getElementById('streakNotifToggle').checked = 
+    localStorage.getItem('streakNotif') === '1';
+  
+  document.getElementById('darkToggle').checked = 
+    localStorage.getItem('darkMode') === '1';
+  
+  document.getElementById('animationsToggle').checked = 
+    localStorage.getItem('animations') !== '0';
+  
+  applyTheme();
+}
+
+// Notifications
+document.getElementById('notifToggle').onchange = function() {
+  localStorage.setItem('notif', this.checked ? '1' : '0');
+  if (this.checked) {
+    alert('✅ Notifications activées ! Vous recevrez des rappels pour vos sessions.');
+  }
+};
+
+document.getElementById('dailyReminderToggle').onchange = function() {
+  localStorage.setItem('dailyReminder', this.checked ? '1' : '0');
+};
+
+document.getElementById('streakNotifToggle').onchange = function() {
+  localStorage.setItem('streakNotif', this.checked ? '1' : '0');
+};
+
+// Appearance
+document.getElementById('darkToggle').onchange = function() {
+  localStorage.setItem('darkMode', this.checked ? '1' : '0');
+  applyTheme();
+};
+
+document.getElementById('animationsToggle').onchange = function() {
+  localStorage.setItem('animations', this.checked ? '1' : '0');
+};
+
+// Export data
+document.getElementById('exportBtn').onclick = function() {
+  const data = {
+    profile: {
+      name: localStorage.getItem('profileName'),
+      email: localStorage.getItem('profileEmail'),
+      gender: localStorage.getItem('profileGender')
+    },
+    settings: {
+      colorTheme: localStorage.getItem('colorTheme'),
+      darkMode: localStorage.getItem('darkMode'),
+      notifications: localStorage.getItem('notif')
+    },
+    stats: {
+      streak: localStorage.getItem('streak'),
+      completed: localStorage.getItem('completed'),
+      totalMinutes: localStorage.getItem('totalMinutes')
+    },
+    habits: JSON.parse(localStorage.getItem('habits') || '[]'),
+    commitments: JSON.parse(localStorage.getItem('commitments') || '[]'),
+    activityLog: JSON.parse(localStorage.getItem('activityLog') || '[]')
+  };
+
+  const dataStr = JSON.stringify(data, null, 2);
+  const blob = new Blob([dataStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `oasis-backup-${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+
+  alert('✅ Your data has been exported successfully!');
+};
+
+// Reset stats
+document.getElementById('resetStatsBtn').onclick = function() {
+  if (confirm('⚠️ Are you sure you want to reset your statistics? This action is irreversible.')) {
+    if (confirm('Final confirmation: your statistics (streak, sessions) will be lost but your habits will be kept.')) {
+      localStorage.setItem('streak', '0');
+      localStorage.setItem('completed', '0');
+      localStorage.setItem('totalMinutes', '0');
+      localStorage.removeItem('lastCompletedDate');
+      localStorage.setItem('activityLog', '[]');
+      
+      alert('✅ Statistics reset! You can start again from zero.');
+      setTimeout(() => window.location.reload(), 1000);
+    }
+  }
+};
+
+// Delete all data
+document.getElementById('deleteAllBtn').onclick = function() {
+  if (confirm('🚨 WARNING: Are you ABSOLUTELY sure you want to delete ALL your data?')) {
+    if (confirm('This action is IRREVERSIBLE. All your habits, statistics and commitments will be permanently lost.')) {
+      const finalConfirm = prompt('Type "DELETE" to confirm:');
+      if (finalConfirm === 'DELETE') {
+        localStorage.clear();
+        alert('✅ All data has been deleted.');
+        window.location.href = 'index.html';
+      } else {
+        alert('❌ Deletion canceled.');
+      }
+    }
+  }
+};
+
+// Delete account
+document.getElementById('deleteAccountBtn').onclick = function() {
+  if (confirm('🚨 WARNING: Deleting your account will PERMANENTLY erase all your data!')) {
+    if (confirm('This action is IRREVERSIBLE. Are you sure?')) {
+      const finalConfirm = prompt('Type "DELETE MY ACCOUNT" to confirm:');
+      if (finalConfirm === 'DELETE MY ACCOUNT') {
+        localStorage.clear();
+        alert('✅ Your account has been deleted. Goodbye! 👋');
+        window.location.href = 'index.html';
+      } else {
+        alert('❌ Deletion canceled.');
+      }
+    }
+  }
+};
+
+// ============= INIT =============
+loadSettings();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#2b003b">
+  <title>My Profile - Oasis of Truth</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Crimson+Text:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Fira+Code:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Flaticon Uicons (local) -->
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-rounded-regular.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-regular-rounded.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-regular-straight.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-solid-rounded.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-solid-straight.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-thin-rounded.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-brands.css">
+
+  <style>
+    :root {
+      --violet-500: #2b003b;
+      --violet-600: #3e1a57;
+      --violet-700: #2a0032;
+      --violet-100: #f3e8ff;
+      --violet-50: #faf5ff;
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-600: #4b5563;
+      --gray-500: #6b7280;
+      --gray-300: #d1d5db;
+      --gray-200: #e5e7eb;
+      --gray-100: #f3f4f6;
+      --green-500: #10b981;
+      --red-500: #ef4444;
+    }
+
+    /* ================= GLOBAL ================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, var(--violet-50), #fff);
+      color: var(--gray-900);
+      min-height: 100vh;
+    }
+
+    /* ================= HEADER ================= */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(43, 0, 59, 0.10);
+    }
+
+    .header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--violet-600);
+    }
+
+    .hamburger,
+    .profile-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--violet-600);
+      padding: 4px;
+    }
+
+    .profile-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--violet-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: var(--violet-600);
+      font-size: 0.9rem;
+    }
+
+    /* ================= NAVIGATION ================= */
+    .slide-nav {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 260px;
+      height: 100%;
+      background: white;
+      padding: 80px 20px 20px;
+      transition: 0.3s ease;
+      box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+      z-index: 999;
+    }
+
+    .slide-nav.active {
+      left: 0;
+    }
+
+    .slide-nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .slide-nav a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--gray-700);
+      font-size: 0.95rem;
+      padding: 12px 16px;
+      display: block;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
+
+    .slide-nav a:hover {
+      background: var(--violet-50);
+      color: var(--violet-600);
+    }
+
+    /* Profile menu */
+    .profile-menu {
+      position: absolute;
+      top: 56px;
+      right: 16px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+      padding: 8px 0;
+      display: none;
+      min-width: 160px;
+      z-index: 1001;
+    }
+
+    .profile-menu.active {
+      display: block;
+    }
+
+    .profile-menu a {
+      display: block;
+      padding: 10px 16px;
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--gray-700);
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+
+    .profile-menu a:hover {
+      background: var(--violet-50);
+      color: var(--violet-600);
+    }
+
+    /* ================= CONTENT ================= */
+    main {
+      padding: 20px 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 24px;
+      color: var(--gray-900);
+    }
+
+    /* Profile Card */
+    .profile-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 2px 16px rgba(43, 0, 59, 0.08);
+      padding: 32px 24px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet-100), var(--violet-50));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px auto;
+      font-size: 3.5rem;
+      color: var(--violet-600);
+      border: 4px solid white;
+      box-shadow: 0 4px 16px rgba(43, 0, 59, 0.2);
+    }
+
+    .profile-info {
+      margin-bottom: 20px;
+    }
+
+    .profile-info h2 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: var(--gray-900);
+    }
+
+    .profile-info p {
+      color: var(--gray-600);
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .profile-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--violet-100);
+      color: var(--violet-600);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    /* Stats Grid */
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 24px 0;
+      padding: 20px 0;
+      border-top: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--violet-600);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--gray-600);
+      font-weight: 500;
+    }
+
+    /* Buttons */
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-bottom: 12px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--violet-600), var(--violet-500));
+      color: white;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--gray-100);
+      color: var(--gray-700);
+    }
+
+    .btn-secondary:hover {
+      background: var(--gray-200);
+    }
+
+    /* Edit Form */
+    .edit-form {
+      margin-top: 24px;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--gray-300);
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--violet-500);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .form-actions .btn {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    /* Info Section */
+    .info-section {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .info-section h3 {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      color: var(--gray-900);
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-label {
+      color: var(--gray-600);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .info-value {
+      color: var(--gray-900);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (min-width: 600px) {
+      .header-title {
+        font-size: 1.3rem;
+      }
+
+      main {
+        padding: 32px 24px;
+      }
+
+      .page-title {
+        font-size: 2.2rem;
+      }
+
+      .profile-card {
+        padding: 40px 32px;
+      }
+
+      .avatar {
+        width: 120px;
+        height: 120px;
+        font-size: 4rem;
+      }
+    }
+  </style>
+  <script>
+  // ============= THEME MANAGEMENT =============
+  // Complete theme definitions with colors and fonts
+  const themeDefinitions = {
+    default: { colors: {}, fonts: { body: "'Inter', sans-serif", heading: "'Playfair Display', serif" } },
+    olive: { colors: { primary500: '#6B8E23', primary600: '#556B2F', primary700: '#3D4F1F', primary100: '#F4EFE6', primary50: '#FAFAF7', gray900: '#2F2F2F', gray700: '#4A4A4A', gray600: '#5F5F5F', gray500: '#757575' }, fonts: { body: "'Crimson Text', serif", heading: "'Playfair Display', serif" }, background: 'linear-gradient(180deg, #FAFAF7, #F4EFE6)' },
+    japan: { colors: { primary500: '#1F1F1F', primary600: '#0D0D0D', primary700: '#000000', primary100: '#F5F5F5', primary50: '#FFFFFF', gray900: '#0D0D0D', gray700: '#2F2F2F', gray600: '#4A4A4A', gray500: '#757575' }, fonts: { body: "'Noto Sans JP', sans-serif", heading: "'Zen Kaku Gothic New', sans-serif" }, background: 'linear-gradient(180deg, #FFFFFF, #F5F5F5)' },
+    pixel: { colors: { primary500: '#00FF00', primary600: '#00DD00', primary700: '#00BB00', primary100: '#E6FFE6', primary50: '#F2FFF2', gray900: '#000000', gray700: '#1F1F1F', gray600: '#3F3F3F', gray500: '#5F5F5F' }, fonts: { body: "'JetBrains Mono', monospace", heading: "'Fira Code', monospace" }, background: 'linear-gradient(180deg, #000000, #0F0F0F)' }
+  };
+
+  function applyTheme() {
+    const theme = localStorage.getItem('colorTheme') || 'default';
+    const dark = localStorage.getItem('darkMode') === '1';
+    const themeClasses = ['theme-ocean', 'theme-forest', 'theme-sunset', 'theme-rose', 'theme-midnight', 'theme-japan', 'theme-pixel', 'theme-winter', 'theme-summer', 'theme-olive'];
+    document.body.classList.remove(...themeClasses);
+    
+    if (theme !== 'default') {
+      document.body.classList.add('theme-' + theme);
+    }
+    
+    // Apply theme-specific styles
+    const root = document.documentElement;
+    const themeDef = themeDefinitions[theme];
+    if (themeDef) {
+      // Apply colors
+      if (themeDef.colors.primary500) root.style.setProperty('--violet-500', themeDef.colors.primary500);
+      if (themeDef.colors.primary600) root.style.setProperty('--violet-600', themeDef.colors.primary600);
+      if (themeDef.colors.primary700) root.style.setProperty('--violet-700', themeDef.colors.primary700);
+      if (themeDef.colors.primary100) root.style.setProperty('--violet-100', themeDef.colors.primary100);
+      if (themeDef.colors.primary50) root.style.setProperty('--violet-50', themeDef.colors.primary50);
+      
+      // Apply fonts
+      root.style.setProperty('--font-body', themeDef.fonts.body);
+      root.style.setProperty('--font-heading', themeDef.fonts.heading);
+      document.body.style.fontFamily = themeDef.fonts.body;
+      
+      // Apply background if specified
+      if (themeDef.background) {
+        document.body.style.background = themeDef.background;
+      }
+    }
+    
+    document.body.classList.toggle('dark-theme', dark);
+  }
+  
+  document.addEventListener('DOMContentLoaded', applyTheme);
+  </script>
+</head>
+<body>
+
+<header class="app-header">
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
+  <div class="header-title">Oasis of Truth</div>
+  <button class="profile-btn" id="profileBtn" aria-label="Profile">
+    <div class="profile-icon" id="profileIcon">U</div>
+  </button>
+
+  <nav class="slide-nav" id="slideNav">
+    <ul>
+      <li><a href="/pages/dashboard.html">📊 Dashboard</a></li>
+        <li><a href="/pages/profile.html">👤 My profile</a></li>
+        <li><a href="/pages/commitmentpage.html">🎯 My commitments</a></li>
+        <li><a href="/pages/statistics.html">📈 Statistics</a></li>
+        <li><a href="/pages/parametes.html">⚙️ Settings</a></li>
+    </ul>
+  </nav>
+
+  <div class="profile-menu" id="profileMenu">
+    <a href="/pages/profile.html">View profile</a>
+    <a href="/pages/parametes.html">Settings</a>
+    <a href="#" id="logoutBtn">Log out</a>
+  </div>
+</header>
+
+<script src="/assets/js/profile-icon.js"></script>
+
+<main>
+  <h1 class="page-title">My Profile</h1>
+
+  <div class="profile-card">
+    <div class="avatar" id="avatarIcon">👤</div>
+    
+    <div class="profile-info">
+      <h2 id="profileName">Full Name</h2>
+      <p id="profileEmail">email@example.com</p>
+      <span class="profile-badge" id="profileGenderBadge">
+        <span id="profileGender">Not specified</span>
+      </span>
+    </div>
+
+    <div class="profile-stats">
+      <div class="stat-item">
+        <span class="stat-value" id="streakStat">0</span>
+        <span class="stat-label">Streak (days)</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" id="habitsStat">0</span>
+        <span class="stat-label">Habits</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" id="completedStat">0</span>
+        <span class="stat-label">Sessions</span>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" id="editProfileBtn">✏️ Edit profile</button>
+
+    <!-- Edit Form (hidden by default) -->
+    <div class="edit-form" id="editForm" style="display: none;">
+      <form id="profileForm">
+        <div class="form-group">
+          <label for="editName">Full name</label>
+          <input type="text" id="editName" placeholder="Your name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="editEmail">Email</label>
+          <input type="email" id="editEmail" placeholder="your@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="editGender">Gender</label>
+          <select id="editGender">
+            <option value="">Not specified</option>
+            <option value="femme">Female</option>
+            <option value="homme">Male</option>
+            <option value="non-binaire">Non-binary</option>
+            <option value="autre">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="editAvatar">Avatar</label>
+          <select id="editAvatar">
+            <option value="👤">👤 Default</option>
+            <option value="👩">👩 Female</option>
+            <option value="👨">👨 Male</option>
+            <option value="🧑">🧑 Neutral</option>
+            <option value="✨">✨ Sparkle</option>
+            <option value="🌟">🌟 Star</option>
+            <option value="💎">💎 Gem</option>
+          </select>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" id="cancelEdit">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h3>Account information</h3>
+    <div class="info-row">
+      <span class="info-label">Member since</span>
+      <span class="info-value" id="memberSince">Today</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Last session</span>
+      <span class="info-value" id="lastSession">Never</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Minutes invested</span>
+      <span class="info-value" id="totalMinutes">0 min</span>
+    </div>
+  </div>
+</main>
+
+<script>
+// ============= NAVIGATION =============
+const hamburger = document.getElementById('hamburgerBtn');
+const slideNav = document.getElementById('slideNav');
+const profileBtn = document.getElementById('profileBtn');
+const profileMenu = document.getElementById('profileMenu');
+
+hamburger.onclick = () => slideNav.classList.toggle('active');
+profileBtn.onclick = () => profileMenu.classList.toggle('active');
+
+document.addEventListener('click', e => {
+  if (!slideNav.contains(e.target) && !hamburger.contains(e.target)) {
+    slideNav.classList.remove('active');
+  }
+  if (!profileMenu.contains(e.target) && !profileBtn.contains(e.target)) {
+    profileMenu.classList.remove('active');
+  }
+});
+
+// Logout
+document.getElementById('logoutBtn').onclick = (e) => {
+  e.preventDefault();
+  if (confirm('Are you sure you want to log out?')) {
+    localStorage.clear();
+    window.location.href = 'index.html';
+  }
+};
+
+// ============= PROFILE MANAGEMENT =============
+function getProfile() {
+  return {
+    name: localStorage.getItem('profileName') || 'Full Name',
+    email: localStorage.getItem('profileEmail') || 'email@example.com',
+    gender: localStorage.getItem('profileGender') || '',
+    avatar: localStorage.getItem('profileAvatar') || '👤',
+    memberSince: localStorage.getItem('memberSince') || new Date().toISOString()
+  };
+}
+
+function setProfile(profile) {
+  localStorage.setItem('profileName', profile.name);
+  localStorage.setItem('profileEmail', profile.email);
+  localStorage.setItem('profileGender', profile.gender);
+  localStorage.setItem('profileAvatar', profile.avatar);
+  if (!localStorage.getItem('memberSince')) {
+    localStorage.setItem('memberSince', profile.memberSince);
+  }
+}
+
+function updateProfileUI() {
+  const profile = getProfile();
+  
+  // Update profile display
+  document.getElementById('profileName').textContent = profile.name;
+  document.getElementById('profileEmail').textContent = profile.email;
+  
+  const genderText = profile.gender || 'Not specified';
+  document.getElementById('profileGender').textContent = genderText;
+  
+  // Update avatar
+  document.getElementById('avatarIcon').textContent = profile.avatar;
+  document.getElementById('profileIcon').textContent = profile.name.charAt(0).toUpperCase();
+
+  // Update stats
+  const streak = parseInt(localStorage.getItem('streak') || '0', 10);
+  const completed = parseInt(localStorage.getItem('completed') || '0', 10);
+  const habits = JSON.parse(localStorage.getItem('habits') || '[]');
+  const totalMinutes = parseInt(localStorage.getItem('totalMinutes') || '0', 10);
+
+  document.getElementById('streakStat').textContent = streak;
+  document.getElementById('habitsStat').textContent = habits.length;
+  document.getElementById('completedStat').textContent = completed;
+  document.getElementById('totalMinutes').textContent = totalMinutes + ' min';
+
+  // Member since
+  const memberDate = new Date(profile.memberSince);
+  const today = new Date();
+  const diffDays = Math.floor((today - memberDate) / (1000 * 60 * 60 * 24));
+  
+  let memberSinceText;
+  if (diffDays === 0) memberSinceText = "Today";
+  else if (diffDays === 1) memberSinceText = "Yesterday";
+  else if (diffDays < 30) memberSinceText = `${diffDays} days ago`;
+  else memberSinceText = memberDate.toLocaleDateString('en-US');
+  
+  document.getElementById('memberSince').textContent = memberSinceText;
+
+  // Last session
+  const lastCompleted = localStorage.getItem('lastCompletedDate');
+  if (lastCompleted) {
+    const lastDate = new Date(lastCompleted);
+    const diffMs = today - lastDate;
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    
+    let lastSessionText;
+    if (diffHours < 1) lastSessionText = "Just now";
+    else if (diffHours < 24) lastSessionText = `${diffHours}h ago`;
+    else if (diffHours < 48) lastSessionText = "Yesterday";
+    else lastSessionText = lastDate.toLocaleDateString('en-US');
+    
+    document.getElementById('lastSession').textContent = lastSessionText;
+  } else {
+    document.getElementById('lastSession').textContent = "Never";
+  }
+}
+
+// ============= EDIT PROFILE =============
+const editBtn = document.getElementById('editProfileBtn');
+const editForm = document.getElementById('editForm');
+const cancelBtn = document.getElementById('cancelEdit');
+const profileForm = document.getElementById('profileForm');
+
+editBtn.onclick = () => {
+  const profile = getProfile();
+  
+  // Show form
+  editForm.style.display = 'block';
+  editBtn.style.display = 'none';
+  
+  // Populate form
+  document.getElementById('editName').value = profile.name;
+  document.getElementById('editEmail').value = profile.email;
+  document.getElementById('editGender').value = profile.gender;
+  document.getElementById('editAvatar').value = profile.avatar;
+};
+
+cancelBtn.onclick = () => {
+  editForm.style.display = 'none';
+  editBtn.style.display = 'block';
+};
+
+profileForm.onsubmit = (e) => {
+  e.preventDefault();
+  
+  const profile = {
+    name: document.getElementById('editName').value.trim() || 'Full Name',
+    email: document.getElementById('editEmail').value.trim() || 'email@example.com',
+    gender: document.getElementById('editGender').value,
+    avatar: document.getElementById('editAvatar').value,
+    memberSince: getProfile().memberSince
+  };
+  
+  setProfile(profile);
+  updateProfileUI();
+  
+  editForm.style.display = 'none';
+  editBtn.style.display = 'block';
+  
+  alert('✅ Profile updated successfully!');
+};
+
+// ============= INIT =============
+updateProfileUI();
+</script>
+
+<!-- Bottom navigation (mobile) -->
+<style>
+  .bottom-nav{position:fixed;left:0;right:0;bottom:0;display:none;background:rgba(255,255,255,0.98);backdrop-filter:blur(8px);border-top:1px solid rgba(43,0,59,0.06);box-shadow:0 -6px 24px rgba(0,0,0,0.08);z-index:1005;padding:env(safe-area-inset-bottom,12px) 12px 12px}
+  .bottom-nav .nav-row{display:flex;gap:6px;justify-content:space-around;align-items:center;max-width:900px;margin:0 auto}
+  .bottom-nav .nav-item{text-decoration:none;color:var(--gray-700);display:flex;flex-direction:column;align-items:center;font-size:0.8rem;gap:4px;padding:8px 6px;border-radius:10px;transition:background .12s,transform .12s}
+  .bottom-nav .nav-item .nav-icon{font-size:1.25rem;line-height:1}
+  .bottom-nav .nav-item.active,.bottom-nav .nav-item:focus,.bottom-nav .nav-item:hover{color:var(--primary-600);transform:translateY(-4px)}
+  @media (max-width:900px){.bottom-nav{display:block}.hamburger{display:none}main{padding-bottom:calc(84px + env(safe-area-inset-bottom))}}
+</style>
+<nav class="bottom-nav" id="bottomNav" role="navigation" aria-label="Bottom navigation">
+  <div class="nav-row">
+    <a href="/pages/dashboard.html" class="nav-item" data-key="dashboard" aria-label="Dashboard"><div class="nav-icon"><i class="fi fi-rr-dashboard"></i></div><div class="nav-label">Dashboard</div></a>
+    <a href="/pages/profile.html" class="nav-item" data-key="profile" aria-label="Profile"><div class="nav-icon" id="bottomProfileIcon"></div><div class="nav-label">Profile</div></a>
+    <a href="/pages/commitmentpage.html" class="nav-item" data-key="commitments" aria-label="Commitments"><div class="nav-icon"><i class="fi fi-rr-diploma"></i></div><div class="nav-label">Commitments</div></a>
+    <a href="/pages/statistics.html" class="nav-item" data-key="statistics" aria-label="Statistics"><div class="nav-icon"><i class="fi fi-rr-chart-pie"></i></div><div class="nav-label">Stats</div></a>
+    <a href="/pages/parametes.html" class="nav-item" data-key="settings" aria-label="Settings"><div class="nav-icon"><i class="fi fi-rr-settings"></i></div><div class="nav-label">Settings</div></a>
+  </div>
+</nav>
+<script>
+  (function(){
+    const path=window.location.pathname||'';
+    const map={'/pages/dashboard.html':'dashboard','/pages/profile.html':'profile','/pages/commitmentpage.html':'commitments','/pages/statistics.html':'statistics','/pages/parametes.html':'settings'};
+    const key=map[path]||Object.keys(map).find(k=>path.endsWith(k.split('/').pop()))||'dashboard';
+    document.querySelectorAll('.bottom-nav .nav-item').forEach(item=>{if(item.dataset.key===key)item.classList.add('active')});
+    try{const h=document.getElementById('profileIcon'),b=document.getElementById('bottomProfileIcon');if(h&&b){b.innerHTML=h.innerHTML}}catch(e){}
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#2b003b">
+  <title>Statistics - Oasis of Truth</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Crimson+Text:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Fira+Code:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Flaticon Uicons (local) -->
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-rounded-regular.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-regular-rounded.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-regular-straight.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-solid-rounded.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-solid-straight.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-thin-rounded.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-brands.css">
+
+  <style>
+    :root {
+      --violet-500: #2b003b;
+      --violet-600: #3e1a57;
+      --violet-700: #2a0032;
+      --violet-100: #f3e8ff;
+      --violet-50: #faf5ff;
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-600: #4b5563;
+      --gray-500: #6b7280;
+      --gray-300: #d1d5db;
+      --gray-200: #e5e7eb;
+      --gray-100: #f3f4f6;
+      --green-500: #10b981;
+      --green-100: #d1fae5;
+      --amber-500: #f59e0b;
+      --amber-100: #fef3c7;
+      --blue-500: #3b82f6;
+      --blue-100: #dbeafe;
+    }
+
+    /* ================= GLOBAL ================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, var(--violet-50), #fff);
+      color: var(--gray-900);
+      min-height: 100vh;
+    }
+
+    /* ================= HEADER ================= */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(43, 0, 59, 0.10);
+    }
+
+    .header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--violet-600);
+    }
+
+    .hamburger,
+    .profile-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--violet-600);
+      padding: 4px;
+    }
+
+    .profile-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--violet-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: var(--violet-600);
+      font-size: 0.9rem;
+    }
+
+    /* ================= NAVIGATION ================= */
+    .slide-nav {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 260px;
+      height: 100%;
+      background: white;
+      padding: 80px 20px 20px;
+      transition: 0.3s ease;
+      box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+      z-index: 999;
+    }
+
+    .slide-nav.active {
+      left: 0;
+    }
+
+    .slide-nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .slide-nav a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--gray-700);
+      font-size: 0.95rem;
+      padding: 12px 16px;
+      display: block;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
+
+    .slide-nav a:hover {
+      background: var(--violet-50);
+      color: var(--violet-600);
+    }
+
+    /* Profile menu */
+    .profile-menu {
+      position: absolute;
+      top: 56px;
+      right: 16px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+      padding: 8px 0;
+      display: none;
+      min-width: 160px;
+      z-index: 1001;
+    }
+
+    .profile-menu.active {
+      display: block;
+    }
+
+  document.getElementById('minutesChange').textContent = 
+    `${hours}h${mins > 0 ? ' ' + mins + 'min' : ''} total`;
+      padding: 10px 16px;
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--gray-700);
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+  document.getElementById('completedChange').textContent = 
+    `+${weekSessions} this week`;
+      background: var(--violet-50);
+      color: var(--violet-600);
+    document.getElementById('habitsChange').textContent = 
+      `${habits.length} habits`;
+    /* ================= CONTENT ================= */
+    document.getElementById('habitsChange').textContent = 'Unlocked';
+      padding: 20px 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 12px;
+      color: var(--gray-900);
+    }
+
+    .page-subtitle {
+      text-align: center;
+      color: var(--gray-600);
+      margin-bottom: 32px;
+      font-size: 1rem;
+    }
+
+    /* Stats Overview */
+    .stats-overview {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: 0.2s;
+      border: 2px solid transparent;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px rgba(43, 0, 59, 0.15);
+      border-color: var(--violet-100);
+    }
+
+    .stat-icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--violet-600);
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      font-weight: 600;
+    }
+
+    .stat-change {
+      font-size: 0.8rem;
+      margin-top: 8px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .stat-change.positive {
+      background: var(--green-100);
+      color: var(--green-500);
+    }
+
+    .stat-change.neutral {
+      background: var(--gray-100);
+      color: var(--gray-500);
+    }
+
+    /* Progress Section */
+    .progress-section {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .progress-section h3 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: var(--gray-900);
+    }
+
+    .progress-item {
+      margin-bottom: 24px;
+    }
+
+    .progress-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .progress-label {
+      font-weight: 600;
+      color: var(--gray-700);
+      font-size: 0.95rem;
+    }
+
+    .progress-value {
+      font-weight: 700;
+      color: var(--violet-600);
+      font-size: 0.9rem;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: var(--gray-100);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--violet-600), var(--violet-500));
+      border-radius: 999px;
+      transition: width 0.6s ease;
+    }
+
+    /* Calendar Heatmap */
+    .calendar-section {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .calendar-section h3 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: var(--gray-900);
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+
+    .calendar-day {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      background: var(--gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--gray-500);
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .calendar-day.completed {
+      background: linear-gradient(135deg, var(--green-500), #059669);
+      color: white;
+    }
+
+    .calendar-day.current {
+      border: 2px solid var(--violet-500);
+    }
+
+    .calendar-legend {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--gray-600);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-box {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+    }
+
+    /* Habits Breakdown */
+    .habits-breakdown {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .habits-breakdown h3 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: var(--gray-900);
+    }
+
+    .habit-item {
+      padding: 16px;
+      border-radius: 12px;
+      background: var(--gray-50);
+      margin-bottom: 12px;
+    }
+
+    .habit-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .habit-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .habit-name {
+      font-weight: 700;
+      color: var(--gray-900);
+      font-size: 1rem;
+    }
+
+    .habit-stats {
+      display: flex;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: var(--gray-600);
+    }
+
+    .habit-stat {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (min-width: 600px) {
+      .header-title {
+        font-size: 1.3rem;
+      }
+
+      main {
+        padding: 32px 24px;
+      }
+
+      .page-title {
+        font-size: 2.2rem;
+      }
+
+      .stats-overview {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .calendar-grid {
+        gap: 8px;
+      }
+
+      .calendar-day {
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .stats-overview {
+        gap: 20px;
+      }
+    }
+  </style>
+  <script>
+  // ============= THEME MANAGEMENT =============
+  // Complete theme definitions with colors and fonts
+  const themeDefinitions = {
+    default: { colors: {}, fonts: { body: "'Inter', sans-serif", heading: "'Playfair Display', serif" } },
+    olive: { colors: { primary500: '#6B8E23', primary600: '#556B2F', primary700: '#3D4F1F', primary100: '#F4EFE6', primary50: '#FAFAF7', gray900: '#2F2F2F', gray700: '#4A4A4A', gray600: '#5F5F5F', gray500: '#757575' }, fonts: { body: "'Crimson Text', serif", heading: "'Playfair Display', serif" }, background: 'linear-gradient(180deg, #FAFAF7, #F4EFE6)' },
+    japan: { colors: { primary500: '#1F1F1F', primary600: '#0D0D0D', primary700: '#000000', primary100: '#F5F5F5', primary50: '#FFFFFF', gray900: '#0D0D0D', gray700: '#2F2F2F', gray600: '#4A4A4A', gray500: '#757575' }, fonts: { body: "'Noto Sans JP', sans-serif", heading: "'Zen Kaku Gothic New', sans-serif" }, background: 'linear-gradient(180deg, #FFFFFF, #F5F5F5)' },
+    pixel: { colors: { primary500: '#00FF00', primary600: '#00DD00', primary700: '#00BB00', primary100: '#E6FFE6', primary50: '#F2FFF2', gray900: '#000000', gray700: '#1F1F1F', gray600: '#3F3F3F', gray500: '#5F5F5F' }, fonts: { body: "'JetBrains Mono', monospace", heading: "'Fira Code', monospace" }, background: 'linear-gradient(180deg, #000000, #0F0F0F)' }
+  };
+
+  function applyTheme() {
+    const theme = localStorage.getItem('colorTheme') || 'default';
+    const dark = localStorage.getItem('darkMode') === '1';
+    const themeClasses = ['theme-ocean', 'theme-forest', 'theme-sunset', 'theme-rose', 'theme-midnight', 'theme-japan', 'theme-pixel', 'theme-winter', 'theme-summer', 'theme-olive'];
+    document.body.classList.remove(...themeClasses);
+    
+    if (theme !== 'default') {
+      document.body.classList.add('theme-' + theme);
+    }
+    
+    // Apply theme-specific styles
+    const root = document.documentElement;
+    const themeDef = themeDefinitions[theme];
+    if (themeDef) {
+      // Apply colors
+      if (themeDef.colors.primary500) root.style.setProperty('--violet-500', themeDef.colors.primary500);
+      if (themeDef.colors.primary600) root.style.setProperty('--violet-600', themeDef.colors.primary600);
+      if (themeDef.colors.primary700) root.style.setProperty('--violet-700', themeDef.colors.primary700);
+      if (themeDef.colors.primary100) root.style.setProperty('--violet-100', themeDef.colors.primary100);
+      if (themeDef.colors.primary50) root.style.setProperty('--violet-50', themeDef.colors.primary50);
+      
+      // Apply fonts
+      root.style.setProperty('--font-body', themeDef.fonts.body);
+      root.style.setProperty('--font-heading', themeDef.fonts.heading);
+      document.body.style.fontFamily = themeDef.fonts.body;
+      
+      // Apply background if specified
+      if (themeDef.background) {
+        document.body.style.background = themeDef.background;
+      }
+    }
+    
+    document.body.classList.toggle('dark-theme', dark);
+  }
+  
+  document.addEventListener('DOMContentLoaded', applyTheme);
+  </script>
+</head>
+<body>
+
+<header class="app-header">
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
+  <div class="header-title">Oasis of Truth</div>
+  <button class="profile-btn" id="profileBtn" aria-label="Profil">
+    <div class="profile-icon" id="profileIcon">U</div>
+  </button>
+
+  <nav class="slide-nav" id="slideNav">
+    <ul>
+        <li><a href="/pages/dashboard.html">Dashboard</a></li>
+        <li><a href="/pages/profile.html">Profile</a></li>
+        <li><a href="/pages/commitmentpage.html">Commitment</a></li>
+        <li><a href="/pages/statistics.html">Statistics</a></li>
+        <li><a href="/pages/parametes.html">Settings</a></li>
+    </ul>
+  </nav>
+
+  <div class="profile-menu" id="profileMenu">
+    <a href="profile.html">View profile</a>
+    <a href="settings.html">Settings</a>
+    <a href="#" id="logoutBtn">Log out</a>
+  </div>
+</header>
+
+<script src="/assets/js/profile-icon.js"></script>
+
+<main>
+  <h1 class="page-title">Statistics</h1>
+  <p class="page-subtitle">Track your progress and achievements</p>
+
+  <div class="stats-overview">
+    <div class="stat-card">
+      <div class="stat-icon">🔥</div>
+      <div class="stat-value" id="streakValue">0</div>
+      <div class="stat-label">Consecutive days</div>
+      <div class="stat-change positive" id="streakChange">Today</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">✅</div>
+      <div class="stat-value" id="completedValue">0</div>
+      <div class="stat-label">Total sessions</div>
+      <div class="stat-change neutral" id="completedChange">+0 this week</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">⏱️</div>
+      <div class="stat-value" id="minutesValue">0</div>
+      <div class="stat-label">Minutes invested</div>
+      <div class="stat-change neutral" id="minutesChange">0h total</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">🎯</div>
+      <div class="stat-value" id="habitsValue">0</div>
+      <div class="stat-label">Active habits</div>
+      <div class="stat-change neutral" id="habitsChange">Unlocked</div>
+    </div>
+  </div>
+
+  <div class="progress-section">
+    <h3>📊 Progress toward goals</h3>
+    
+    <div class="progress-item">
+      <div class="progress-header">
+        <span class="progress-label">Goal: 15-day streak</span>
+        <span class="progress-value" id="streakProgress">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="streakBar" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <div class="progress-item">
+      <div class="progress-header">
+        <span class="progress-label">Goal: 50 sessions completed</span>
+        <span class="progress-value" id="sessionsProgress">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="sessionsBar" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <div class="progress-item">
+      <div class="progress-header">
+        <span class="progress-label">Goal: 10 hours invested</span>
+        <span class="progress-value" id="hoursProgress">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="hoursBar" style="width: 0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="calendar-section">
+    <h3>📅 Activity (last 28 days)</h3>
+    <div class="calendar-grid" id="calendarGrid"></div>
+    <div class="calendar-legend">
+      <div class="legend-item">
+        <div class="legend-box" style="background: var(--gray-100)"></div>
+        <span>No session</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box" style="background: var(--green-500)"></div>
+        <span>Session completed</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="habits-breakdown">
+    <h3>🌱 Details by habit</h3>
+    <div id="habitsBreakdown"></div>
+  </div>
+</main>
+
+<script>
+// ============= NAVIGATION =============
+const hamburger = document.getElementById('hamburgerBtn');
+const slideNav = document.getElementById('slideNav');
+const profileBtn = document.getElementById('profileBtn');
+const profileMenu = document.getElementById('profileMenu');
+
+hamburger.onclick = () => slideNav.classList.toggle('active');
+profileBtn.onclick = () => profileMenu.classList.toggle('active');
+
+document.addEventListener('click', e => {
+  if (!slideNav.contains(e.target) && !hamburger.contains(e.target)) {
+    slideNav.classList.remove('active');
+  }
+  if (!profileMenu.contains(e.target) && !profileBtn.contains(e.target)) {
+    profileMenu.classList.remove('active');
+  }
+});
+
+// Logout
+document.getElementById('logoutBtn').onclick = (e) => {
+  e.preventDefault();
+  if (confirm('Are you sure you want to log out?')) {
+    localStorage.clear();
+    window.location.href = 'index.html';
+  }
+};
+
+// Set profile icon
+try {
+  const userName = localStorage.getItem('profileName') || 'User';
+  document.getElementById('profileIcon').textContent = userName.charAt(0).toUpperCase();
+} catch (e) {
+  document.getElementById('profileIcon').textContent = 'U';
+}
+
+// ============= STATISTICS =============
+function loadStatistics() {
+  const streak = parseInt(localStorage.getItem('streak') || '0', 10);
+  const completed = parseInt(localStorage.getItem('completed') || '0', 10);
+  const totalMinutes = parseInt(localStorage.getItem('totalMinutes') || '0', 10);
+  const habits = JSON.parse(localStorage.getItem('habits') || '[]');
+  const activityLog = JSON.parse(localStorage.getItem('activityLog') || '[]');
+
+  // Update main stats
+  document.getElementById('streakValue').textContent = streak;
+  document.getElementById('completedValue').textContent = completed;
+  document.getElementById('minutesValue').textContent = totalMinutes;
+  document.getElementById('habitsValue').textContent = habits.length;
+
+  // Update change indicators
+  const hours = Math.floor(totalMinutes / 60);
+  const mins = totalMinutes % 60;
+  document.getElementById('minutesChange').textContent = 
+    `${hours}h${mins > 0 ? ' ' + mins + 'min' : ''} total`;
+
+  // This week sessions
+  const oneWeekAgo = new Date();
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+  const weekSessions = activityLog.filter(log => 
+    new Date(log.date) >= oneWeekAgo
+  ).length;
+  document.getElementById('completedChange').textContent = 
+    `+${weekSessions} this week`;
+
+  if (habits.length > 1) {
+    document.getElementById('habitsChange').textContent = 
+      `${habits.length} habits`;
+  } else {
+    document.getElementById('habitsChange').textContent = 'Unlocked';
+  }
+
+  // Progress bars
+  const streakPercent = Math.min(100, (streak / 15) * 100);
+  const sessionsPercent = Math.min(100, (completed / 50) * 100);
+  const hoursPercent = Math.min(100, (totalMinutes / 600) * 100);
+
+  document.getElementById('streakProgress').textContent = Math.round(streakPercent) + '%';
+  document.getElementById('sessionsProgress').textContent = Math.round(sessionsPercent) + '%';
+  document.getElementById('hoursProgress').textContent = Math.round(hoursPercent) + '%';
+
+  document.getElementById('streakBar').style.width = streakPercent + '%';
+  document.getElementById('sessionsBar').style.width = sessionsPercent + '%';
+  document.getElementById('hoursBar').style.width = hoursPercent + '%';
+
+  // Calendar
+  renderCalendar(activityLog);
+
+  // Habits breakdown
+  renderHabitsBreakdown(habits);
+}
+
+function renderCalendar(activityLog) {
+  const grid = document.getElementById('calendarGrid');
+  grid.innerHTML = '';
+
+  const today = new Date();
+  const last28Days = [];
+
+  for (let i = 27; i >= 0; i--) {
+    const date = new Date(today);
+    date.setDate(date.getDate() - i);
+    last28Days.push(date);
+  }
+
+  last28Days.forEach(date => {
+    const dateStr = date.toISOString().split('T')[0];
+    const hasActivity = activityLog.some(log => {
+      const logDate = new Date(log.date).toISOString().split('T')[0];
+      return logDate === dateStr;
+    });
+
+    const isToday = dateStr === today.toISOString().split('T')[0];
+
+    const day = document.createElement('div');
+    day.className = `calendar-day ${hasActivity ? 'completed' : ''} ${isToday ? 'current' : ''}`;
+    day.textContent = date.getDate();
+    
+    grid.appendChild(day);
+  });
+}
+
+function renderHabitsBreakdown(habits) {
+  const container = document.getElementById('habitsBreakdown');
+  
+  if (habits.length === 0) {
+    container.innerHTML = `
+      <div style="text-align: center; padding: 40px 20px; color: var(--gray-500);">
+        <div style="font-size: 2.5rem; margin-bottom: 12px;"><i class="fi fi-tr-aloe-vera"></i></div>
+        <p>No habits yet.<br>Start your first habit from the dashboard!</p>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = '';
+
+  habits.forEach((habit, index) => {
+    const item = document.createElement('div');
+    item.className = 'habit-item';
+
+    const completionRate = habit.completedCount && habit.streak 
+      ? Math.round((habit.completedCount / Math.max(habit.streak, 1)) * 100)
+      : 0;
+
+    item.innerHTML = `
+      <div class="habit-header">
+        <div class="habit-name">✨ ${habit.name}</div>
+      </div>
+      <div class="habit-stats">
+        <div class="habit-stat">
+          <span>🔥</span>
+          <span><strong>${habit.streak || 0}</strong> days</span>
+        </div>
+        <div class="habit-stat">
+          <span>✓</span>
+          <span><strong>${habit.completedCount || 0}</strong> sessions</span>
+        </div>
+        <div class="habit-stat">
+          <span>📊</span>
+          <span><strong>${completionRate}%</strong> rate</span>
+        </div>
+      </div>
+    `;
+
+    container.appendChild(item);
+  });
+}
+
+// ============= INIT =============
+loadStatistics();
+</script>
+
+<!-- Bottom navigation (mobile) -->
+<style>
+  .bottom-nav{position:fixed;left:0;right:0;bottom:0;display:none;background:rgba(255,255,255,0.98);backdrop-filter:blur(8px);border-top:1px solid rgba(43,0,59,0.06);box-shadow:0 -6px 24px rgba(0,0,0,0.08);z-index:1005;padding:env(safe-area-inset-bottom,12px) 12px 12px}
+  .bottom-nav .nav-row{display:flex;gap:6px;justify-content:space-around;align-items:center;max-width:900px;margin:0 auto}
+  .bottom-nav .nav-item{text-decoration:none;color:var(--gray-700);display:flex;flex-direction:column;align-items:center;font-size:0.8rem;gap:4px;padding:8px 6px;border-radius:10px;transition:background .12s,transform .12s}
+  .bottom-nav .nav-item .nav-icon{font-size:1.25rem;line-height:1}
+  .bottom-nav .nav-item.active,.bottom-nav .nav-item:focus,.bottom-nav .nav-item:hover{color:var(--primary-600);transform:translateY(-4px)}
+  @media (max-width:900px){.bottom-nav{display:block}.hamburger{display:none}main{padding-bottom:calc(84px + env(safe-area-inset-bottom))}}
+</style>
+<nav class="bottom-nav" id="bottomNav" role="navigation" aria-label="Bottom navigation">
+  <div class="nav-row">
+    <a href="/pages/dashboard.html" class="nav-item" data-key="dashboard" aria-label="Dashboard"><div class="nav-icon"><i class="fi fi-rr-dashboard"></i></div><div class="nav-label">Dashboard</div></a>
+    <a href="/pages/profile.html" class="nav-item" data-key="profile" aria-label="Profile"><div class="nav-icon" id="bottomProfileIcon"></div><div class="nav-label">Profile</div></a>
+    <a href="/pages/commitmentpage.html" class="nav-item" data-key="commitments" aria-label="Commitments"><div class="nav-icon"><i class="fi fi-rr-diploma"></i></div><div class="nav-label">Commitments</div></a>
+    <a href="/pages/statistics.html" class="nav-item" data-key="statistics" aria-label="Statistics"><div class="nav-icon"><i class="fi fi-rr-chart-pie"></i></div><div class="nav-label">Stats</div></a>
+    <a href="/pages/parametes.html" class="nav-item" data-key="settings" aria-label="Settings"><div class="nav-icon"><i class="fi fi-rr-settings"></i></div><div class="nav-label">Settings</div></a>
+  </div>
+</nav>
+<script>
+  (function(){
+    const path=window.location.pathname||'';
+    const map={'/pages/dashboard.html':'dashboard','/pages/profile.html':'profile','/pages/commitmentpage.html':'commitments','/pages/statistics.html':'statistics','/pages/parametes.html':'settings'};
+    const key=map[path]||Object.keys(map).find(k=>path.endsWith(k.split('/').pop()))||'dashboard';
+    document.querySelectorAll('.bottom-nav .nav-item').forEach(item=>{if(item.dataset.key===key)item.classList.add('active')});
+    try{const h=document.getElementById('profileIcon'),b=document.getElementById('bottomProfileIcon');if(h&&b){b.innerHTML=h.innerHTML}}catch(e){}
+  })();
+</script>
+</body>
+</html>

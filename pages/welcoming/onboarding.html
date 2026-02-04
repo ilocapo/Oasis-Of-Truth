@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#2b003b">
+<title>Personalize Your Journey - Oasis of Truth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<!-- Flaticon Uicons (installed via npm) -->
+<link href="../../assets/vendor/uicons/uicons-rounded-regular.css" rel="stylesheet">
+<style>
+:root {
+    --violet-500: #2b003b;
+    --violet-600: #3e1a57;
+    --violet-100: #f3e8ff;
+    --gray-900: #111827;
+    --gray-600: #4b5563;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
+    color: var(--gray-900);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.header {
+    padding: 16px 20px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(43, 0, 59, 0.08);
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--violet-600);
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px 20px;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.progress-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 32px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: #d1d5db;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.dot.active {
+    background: var(--violet-600);
+    width: 24px;
+    border-radius: 4px;
+}
+
+.question-card {
+    background: white;
+    border-radius: 24px;
+    padding: 32px 24px;
+    box-shadow: 0 4px 24px rgba(43, 0, 59, 0.12);
+    display: none;
+    animation: fadeSlide 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.question-card.active {
+    display: block;
+}
+
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.question-number {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--violet-600);
+    margin-bottom: 12px;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 12px;
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: var(--gray-600);
+    margin-bottom: 32px;
+    line-height: 1.5;
+}
+
+/* Domain Cards */
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.option-card {
+    background: var(--violet-100);
+    border: 2px solid transparent;
+    border-radius: 16px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.option-card:active {
+    transform: scale(0.98);
+}
+
+.option-card.selected {
+    background: white;
+    border-color: var(--violet-600);
+    box-shadow: 0 4px 16px rgba(43, 0, 59, 0.2);
+}
+
+.option-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--violet-600), var(--violet-500));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.option-content {
+    flex: 1;
+}
+
+.option-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 4px;
+}
+
+.option-description {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+}
+
+/* Time Selector */
+.time-selector {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.time-selector label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-900);
+}
+
+.time-selector select {
+    flex: 1;
+    padding: 14px 16px;
+    font-size: 1rem;
+    border: 2px solid #d1d5db;
+    border-radius: 12px;
+    background: white;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.time-selector select:focus {
+    outline: none;
+    border-color: var(--violet-600);
+    box-shadow: 0 0 0 4px rgba(43, 0, 59, 0.1);
+}
+
+/* Notification Card */
+.notification-preview {
+    background: linear-gradient(135deg, var(--violet-600), var(--violet-500));
+    border-radius: 16px;
+    padding: 20px;
+    color: white;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 24px rgba(43, 0, 59, 0.3);
+}
+
+.notification-preview strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+}
+
+.notification-preview p {
+    font-size: 0.95rem;
+    opacity: 0.95;
+}
+
+/* Buttons */
+.btn-primary {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--violet-600) 0%, var(--violet-500) 100%);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(43, 0, 59, 0.3);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-skip {
+    width: 100%;
+    padding: 14px;
+    background: transparent;
+    color: var(--gray-600);
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    margin-top: 12px;
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">Oasis of Truth</div>
+</header>
+
+<script src="/assets/js/profile-icon.js"></script>
+
+<main>
+    <!-- Progress Dots -->
+    <div class="progress-dots">
+        <div class="dot active" id="dot1"></div>
+        <div class="dot" id="dot2"></div>
+        <div class="dot" id="dot3"></div>
+        <div class="dot" id="dot4"></div>
+    </div>
+
+    <!-- Question 1: Domain -->
+    <div class="question-card active" id="question1">
+        <div class="question-number">QUESTION 1 OF 3</div>
+        <h1>What area of your life do you want to improve?</h1>
+        <p class="subtitle">Choose your primary focus for the next 30 days</p>
+
+        <div class="options-grid" id="domainOptions">
+            <div class="option-card" data-value="health">
+                <div class="option-icon">💪</div>
+                <div class="option-content">
+                    <div class="option-title">Health & Fitness</div>
+                    <div class="option-description">Build physical vitality</div>
+                </div>
+            </div>
+            <div class="option-card" data-value="mindfulness">
+                <div class="option-icon">🧘</div>
+                <div class="option-content">
+                    <div class="option-title">Mindfulness & Peace</div>
+                    <div class="option-description">Cultivate inner calm</div>
+                </div>
+            </div>
+            <div class="option-card" data-value="productivity">
+                <div class="option-icon">🎯</div>
+                <div class="option-content">
+                    <div class="option-title">Productivity & Focus</div>
+                    <div class="option-description">Achieve your goals</div>
+                </div>
+            </div>
+            <div class="option-card" data-value="relationships">
+                <div class="option-icon">💖</div>
+                <div class="option-content">
+                    <div class="option-title">Relationships & Connection</div>
+                    <div class="option-description">Deepen your bonds</div>
+                </div>
+            </div>
+            <div class="option-card" data-value="creativity">
+                <div class="option-icon">🎨</div>
+                <div class="option-content">
+                    <div class="option-title">Creativity & Expression</div>
+                    <div class="option-description">Unlock your potential</div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-primary" id="nextBtn1" disabled>Continue</button>
+    </div>
+
+    <!-- Question 2: Gender (NEW) -->
+    <div class="question-card" id="question2">
+        <div class="question-number">QUESTION 2 OF 4</div>
+        <h1>Quel est votre genre ?</h1>
+        <p class="subtitle">Cette information nous aide à personnaliser les messages (optionnel)</p>
+
+        <div class="options-grid" id="genderOptions">
+            <div class="option-card" data-value="female">
+                <div class="option-icon"><i class="fi fi-ds-woman-head" aria-hidden="true">👩</i></div>
+                <div class="option-content">
+                    <div class="option-title">Femme</div>
+                    <div class="option-description">Pour les messages destinés aux femmes</div>
+                </div>
+            </div>
+            <div class="option-card" data-value="male">
+                <div class="option-icon"><i class="fi fi-ds-man-head" aria-hidden="true">👨</i></div>
+                <div class="option-content">
+                    <div class="option-title">Homme</div>
+                    <div class="option-description">Pour les messages destinés aux hommes</div>
+                </div>
+            </div>
+            <div class="option-card" data-value="other">
+                <div class="option-icon"><i class="fi fi-ds-head-side-thinking" aria-hidden="true">🧠</i></div>
+                <div class="option-content">
+                    <div class="option-title">Autre / Non binaire</div>
+                    <div class="option-description">Préférences non-binaires ou autre</div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-primary" id="nextBtn2" disabled>Continue</button>
+    </div>
+
+    <!-- Question 3: Time -->
+    <div class="question-card" id="question3">
+        <div class="question-number">QUESTION 3 OF 4</div>
+        <h1>When should we remind you?</h1>
+        <p class="subtitle">Pick the best time for your daily 15-minute practice</p>
+
+        <div class="time-selector">
+            <label for="timeSelect">⏰</label>
+            <select id="timeSelect">
+                <option value="">Choose a time...</option>
+                <option value="06:00">6:00 AM - Early morning</option>
+                <option value="07:00">7:00 AM - Morning routine</option>
+                <option value="08:00">8:00 AM - Start of day</option>
+                <option value="12:00">12:00 PM - Lunch break</option>
+                <option value="18:00">6:00 PM - After work</option>
+                <option value="20:00">8:00 PM - Evening</option>
+                <option value="21:00">9:00 PM - Before bed</option>
+            </select>
+        </div>
+
+        <button class="btn-primary" id="nextBtn3" disabled>Continue</button>
+        <button class="btn-skip" id="skipBtn3">Skip for now</button>
+    </div>
+
+    <!-- Question 4: Notifications -->
+    <div class="question-card" id="question4">
+        <div class="question-number">QUESTION 4 OF 4</div>
+        <h1>Enable daily reminders?</h1>
+        <p class="subtitle">Stay consistent with gentle notifications</p>
+
+        <div class="notification-preview">
+            <strong>🌟 Oasis of Truth</strong>
+            <p>Your daily challenge is ready! Take 15 minutes for yourself.</p>
+        </div>
+
+        <button class="btn-primary" id="enableNotif">Enable Notifications</button>
+        <button class="btn-skip" id="skipNotif">Maybe Later</button>
+    </div>
+</main>
+
+<script>
+let onboardingData = {
+    domain: '',
+    gender: '',
+    time: '',
+    notifications: false
+};
+
+// Question 1: Domain selection
+const domainOptions = document.querySelectorAll('#domainOptions .option-card');
+const nextBtn1 = document.getElementById('nextBtn1');
+
+domainOptions.forEach(card => {
+    card.addEventListener('click', function() {
+        domainOptions.forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
+        onboardingData.domain = this.dataset.value;
+        nextBtn1.disabled = false;
+    });
+});
+
+nextBtn1.addEventListener('click', () => goToQuestion(2));
+
+// Question 2: Gender selection handlers
+const genderOptions = document.querySelectorAll('#genderOptions .option-card');
+const nextBtn2 = document.getElementById('nextBtn2');
+genderOptions.forEach(card => {
+    card.addEventListener('click', function() {
+        genderOptions.forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
+        onboardingData.gender = this.dataset.value;
+        nextBtn2.disabled = false;
+    });
+});
+
+nextBtn2.addEventListener('click', () => goToQuestion(3));
+
+// Question 2: Time selection
+const timeSelect = document.getElementById('timeSelect');
+const nextBtn3 = document.getElementById('nextBtn3');
+const skipBtn3 = document.getElementById('skipBtn3');
+
+timeSelect.addEventListener('change', function() {
+    onboardingData.time = this.value;
+    nextBtn3.disabled = !this.value;
+});
+
+nextBtn3.addEventListener('click', () => goToQuestion(4));
+skipBtn3.addEventListener('click', () => goToQuestion(4));
+
+// Question 3: Notifications
+const enableNotif = document.getElementById('enableNotif');
+const skipNotif = document.getElementById('skipNotif');
+
+enableNotif.addEventListener('click', async () => {
+    // Request notification permission
+    if ('Notification' in window) {
+        const permission = await Notification.requestPermission();
+        onboardingData.notifications = (permission === 'granted');
+    }
+    finishOnboarding();
+});
+
+skipNotif.addEventListener('click', () => {
+    onboardingData.notifications = false;
+    finishOnboarding();
+});
+
+// Navigation functions
+function goToQuestion(num) {
+    // Hide all questions
+    document.querySelectorAll('.question-card').forEach(q => q.classList.remove('active'));
+    
+    // Show target question
+    document.getElementById(`question${num}`).classList.add('active');
+    
+    // Update dots
+    document.querySelectorAll('.dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index + 1 === num);
+    });
+    
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
+
+function finishOnboarding() {
+    // Store onboarding data (localStorage in real app)
+    localStorage.setItem('onboardingData', JSON.stringify(onboardingData));
+    // Also persist a simple profileGender value for the header icon (map values)
+    const map = { female: 'woman', male: 'man', other: 'nonbinary' };
+    const profileGender = map[onboardingData.gender] || 'nonbinary';
+    localStorage.setItem('profileGender', profileGender);
+
+    // Redirect to dashboard
+    window.location.href = 'dashboard.html';
+}
+</script>
+
+<!-- Bottom navigation (mobile) -->
+<style>
+    .bottom-nav{position:fixed;left:0;right:0;bottom:0;display:none;background:rgba(255,255,255,0.98);backdrop-filter:blur(8px);border-top:1px solid rgba(43,0,59,0.06);box-shadow:0 -6px 24px rgba(0,0,0,0.08);z-index:1005;padding:env(safe-area-inset-bottom,12px) 12px 12px}
+    .bottom-nav .nav-row{display:flex;gap:6px;justify-content:space-around;align-items:center;max-width:900px;margin:0 auto}
+    .bottom-nav .nav-item{text-decoration:none;color:var(--gray-700);display:flex;flex-direction:column;align-items:center;font-size:0.8rem;gap:4px;padding:8px 6px;border-radius:10px;transition:background .12s,transform .12s}
+    .bottom-nav .nav-item .nav-icon{font-size:1.25rem;line-height:1}
+    .bottom-nav .nav-item.active,.bottom-nav .nav-item:focus,.bottom-nav .nav-item:hover{color:var(--violet-600);transform:translateY(-4px)}
+    @media (max-width:900px){.bottom-nav{display:block}.hamburger{display:none}main{padding-bottom:calc(84px + env(safe-area-inset-bottom))}}
+</style>
+<nav class="bottom-nav" id="bottomNav" role="navigation" aria-label="Bottom navigation">
+    <div class="nav-row">
+        <a href="/pages/dashboard.html" class="nav-item" data-key="dashboard" aria-label="Dashboard"><div class="nav-icon"><i class="fi fi-rr-dashboard"></i></div><div class="nav-label">Dashboard</div></a>
+        <a href="/pages/profile.html" class="nav-item" data-key="profile" aria-label="Profile"><div class="nav-icon" id="bottomProfileIcon"></div><div class="nav-label">Profile</div></a>
+        <a href="/pages/commitmentpage.html" class="nav-item" data-key="commitments" aria-label="Commitments"><div class="nav-icon"><i class="fi fi-rr-diploma"></i></div><div class="nav-label">Commitments</div></a>
+        <a href="/pages/statistics.html" class="nav-item" data-key="statistics" aria-label="Statistics"><div class="nav-icon"><i class="fi fi-rr-chart-pie"></i></div><div class="nav-label">Stats</div></a>
+        <a href="/pages/parametes.html" class="nav-item" data-key="settings" aria-label="Settings"><div class="nav-icon"><i class="fi fi-rr-settings"></i></div><div class="nav-label">Settings</div></a>
+    </div>
+</nav>
+<script>
+    (function(){
+        const path=window.location.pathname||'';
+        const map={'/pages/dashboard.html':'dashboard','/pages/profile.html':'profile','/pages/commitmentpage.html':'commitments','/pages/statistics.html':'statistics','/pages/parametes.html':'settings'};
+        const key=map[path]||Object.keys(map).find(k=>path.endsWith(k.split('/').pop()))||'dashboard';
+        document.querySelectorAll('.bottom-nav .nav-item').forEach(item=>{if(item.dataset.key===key)item.classList.add('active')});
+        try{const h=document.getElementById('profileIcon'),b=document.getElementById('bottomProfileIcon');if(h&&b){b.innerHTML=h.innerHTML}}catch(e){}
+    })();
+</script>
+</body>
+</html>

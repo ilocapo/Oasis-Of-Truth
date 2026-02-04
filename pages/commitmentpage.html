@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#2b003b">
+  <title>My Commitments - Oasis of Truth</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Crimson+Text:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Fira+Code:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Flaticon Uicons (local) -->
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-rounded-regular.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-regular-rounded.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-regular-straight.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-solid-rounded.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-solid-straight.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-thin-rounded.css">
+  <link rel="stylesheet" href="/assets/vendor/uicons/uicons-brands.css">
+
+  <style>
+    :root {
+
+      --violet-500: #2b003b;
+      --violet-600: #3e1a57;
+      --violet-700: #2a0032;
+      --violet-100: #f3e8ff;
+      --violet-50: #faf5ff;
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-600: #4b5563;
+      --gray-500: #6b7280;
+      --gray-300: #d1d5db;
+      --gray-200: #e5e7eb;
+      --gray-100: #f3f4f6;
+      --green-500: #10b981;
+      --red-500: #ef4444;
+    }
+
+    /* ================= GLOBAL ================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, var(--violet-50), #fff);
+      color: var(--gray-900);
+      min-height: 100vh;
+    }
+
+    /* ================= HEADER ================= */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(43, 0, 59, 0.10);
+    }
+
+    .header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--violet-600);
+    }
+
+    .hamburger,
+    .profile-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--violet-600);
+      padding: 4px;
+    }
+
+    .profile-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--violet-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: var(--violet-600);
+      font-size: 0.9rem;
+    }
+
+    /* ================= NAVIGATION ================= */
+    .slide-nav {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 260px;
+      height: 100%;
+      background: white;
+      padding: 80px 20px 20px;
+      transition: 0.3s ease;
+      box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+      z-index: 999;
+    }
+
+    .slide-nav.active {
+      left: 0;
+    }
+
+    .slide-nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .slide-nav a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--gray-700);
+      font-size: 0.95rem;
+      padding: 12px 16px;
+      display: block;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
+
+    .slide-nav a:hover {
+      background: var(--violet-50);
+      color: var(--violet-600);
+    }
+
+    /* Profile menu */
+    .profile-menu {
+      position: absolute;
+      top: 56px;
+      right: 16px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+      padding: 8px 0;
+      display: none;
+      min-width: 160px;
+      z-index: 1001;
+    }
+
+    .profile-menu.active {
+      display: block;
+    }
+
+    .profile-menu a {
+      display: block;
+      padding: 10px 16px;
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--gray-700);
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+
+    .profile-menu a:hover {
+      background: var(--violet-50);
+      color: var(--violet-600);
+    }
+
+    /* ================= CONTENT ================= */
+    main {
+      padding: 20px 16px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 12px;
+      color: var(--gray-900);
+    }
+
+    .page-subtitle {
+      text-align: center;
+      color: var(--gray-600);
+      margin-bottom: 32px;
+      font-size: 1rem;
+    }
+
+    /* Add Commitment */
+    .add-commitment {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .add-commitment h3 {
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      color: var(--gray-900);
+    }
+
+    .input-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .input-group input {
+      flex: 1;
+      padding: 14px 16px;
+      border: 2px solid var(--gray-300);
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: 0.2s;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--violet-500);
+    }
+
+    .input-group button {
+      padding: 14px 24px;
+      background: linear-gradient(135deg, var(--violet-600), var(--violet-500));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 1rem;
+    }
+
+    .input-group button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    /* Commitments List */
+    .commitments-section {
+      margin-bottom: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .section-header h2 {
+      font-size: 1.2rem;
+      color: var(--gray-900);
+      font-weight: 700;
+    }
+
+    .count-badge {
+      background: var(--violet-100);
+      color: var(--violet-600);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .commitments-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .commitment-card {
+      background: white;
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: 0.2s;
+      border: 2px solid transparent;
+    }
+
+    .commitment-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(43, 0, 59, 0.15);
+      border-color: var(--violet-100);
+    }
+
+    .commitment-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--violet-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .commitment-content {
+      flex: 1;
+    }
+
+    .commitment-text {
+      font-weight: 600;
+      color: var(--gray-900);
+      font-size: 1rem;
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+
+    .commitment-date {
+      font-size: 0.8rem;
+      color: var(--gray-500);
+    }
+
+    .commitment-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-action {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-edit {
+      background: var(--violet-100);
+      color: var(--violet-600);
+    }
+
+    .btn-edit:hover {
+      background: var(--violet-200);
+    }
+
+    .btn-delete {
+      background: var(--red-500);
+      color: white;
+    }
+
+    .btn-delete:hover {
+      opacity: 0.9;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .empty-icon {
+      font-size: 4rem;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .empty-state h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: var(--gray-900);
+    }
+
+    .empty-state p {
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* Info Card */
+    .info-card {
+      background: linear-gradient(135deg, var(--violet-600), var(--violet-500));
+      color: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .info-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      opacity: 0.95;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (min-width: 600px) {
+      .header-title {
+        font-size: 1.3rem;
+      }
+
+      main {
+        padding: 32px 24px;
+      }
+
+      .page-title {
+        font-size: 2.2rem;
+      }
+
+      .add-commitment,
+      .commitment-card {
+        padding: 24px;
+      }
+    }
+  </style>
+  <script>
+  // ============= THEME MANAGEMENT =============
+  // Complete theme definitions with colors and fonts
+  const themeDefinitions = {
+    default: { colors: {}, fonts: { body: "'Inter', sans-serif", heading: "'Playfair Display', serif" } },
+    olive: { colors: { primary500: '#6B8E23', primary600: '#556B2F', primary700: '#3D4F1F', primary100: '#F4EFE6', primary50: '#FAFAF7', gray900: '#2F2F2F', gray700: '#4A4A4A', gray600: '#5F5F5F', gray500: '#757575' }, fonts: { body: "'Crimson Text', serif", heading: "'Playfair Display', serif" }, background: 'linear-gradient(180deg, #FAFAF7, #F4EFE6)' },
+    japan: { colors: { primary500: '#1F1F1F', primary600: '#0D0D0D', primary700: '#000000', primary100: '#F5F5F5', primary50: '#FFFFFF', gray900: '#0D0D0D', gray700: '#2F2F2F', gray600: '#4A4A4A', gray500: '#757575' }, fonts: { body: "'Noto Sans JP', sans-serif", heading: "'Zen Kaku Gothic New', sans-serif" }, background: 'linear-gradient(180deg, #FFFFFF, #F5F5F5)' },
+    pixel: { colors: { primary500: '#00FF00', primary600: '#00DD00', primary700: '#00BB00', primary100: '#E6FFE6', primary50: '#F2FFF2', gray900: '#000000', gray700: '#1F1F1F', gray600: '#3F3F3F', gray500: '#5F5F5F' }, fonts: { body: "'JetBrains Mono', monospace", heading: "'Fira Code', monospace" }, background: 'linear-gradient(180deg, #000000, #0F0F0F)' }
+  };
+
+  function applyTheme() {
+    const theme = localStorage.getItem('colorTheme') || 'default';
+    const dark = localStorage.getItem('darkMode') === '1';
+    const themeClasses = ['theme-ocean', 'theme-forest', 'theme-sunset', 'theme-rose', 'theme-midnight', 'theme-japan', 'theme-pixel', 'theme-winter', 'theme-summer', 'theme-olive'];
+    document.body.classList.remove(...themeClasses);
+    
+    if (theme !== 'default') {
+      document.body.classList.add('theme-' + theme);
+    }
+    
+    // Apply theme-specific styles
+    const root = document.documentElement;
+    const themeDef = themeDefinitions[theme];
+    if (themeDef) {
+      // Apply colors
+      if (themeDef.colors.primary500) root.style.setProperty('--violet-500', themeDef.colors.primary500);
+      if (themeDef.colors.primary600) root.style.setProperty('--violet-600', themeDef.colors.primary600);
+      if (themeDef.colors.primary700) root.style.setProperty('--violet-700', themeDef.colors.primary700);
+      if (themeDef.colors.primary100) root.style.setProperty('--violet-100', themeDef.colors.primary100);
+      if (themeDef.colors.primary50) root.style.setProperty('--violet-50', themeDef.colors.primary50);
+      
+      // Apply fonts
+      root.style.setProperty('--font-body', themeDef.fonts.body);
+      root.style.setProperty('--font-heading', themeDef.fonts.heading);
+      document.body.style.fontFamily = themeDef.fonts.body;
+      
+      // Apply background if specified
+      if (themeDef.background) {
+        document.body.style.background = themeDef.background;
+      }
+    }
+    
+    document.body.classList.toggle('dark-theme', dark);
+  }
+  
+  document.addEventListener('DOMContentLoaded', applyTheme);
+  </script>
+</head>
+<body>
+
+<header class="app-header">
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
+  <div class="header-title">Oasis of Truth</div>
+  <button class="profile-btn" id="profileBtn" aria-label="Profil">
+    <div class="profile-icon" id="profileIcon">U</div>
+  </button>
+
+  <nav class="slide-nav" id="slideNav">
+    <ul>
+      <li><a href="/pages/dashboard.html">📊 Dashboard</a></li>
+      <li><a href="/pages/profile.html">👤 My profile</a></li>
+      <li><a href="/pages/commitmentpage.html">🎯 My commitments</a></li>
+      <li><a href="/pages/statistics.html">📈 Statistics</a></li>
+      <li><a href="/pages/parametes.html">⚙️ Settings</a></li>
+    </ul>
+  </nav>
+
+  <div class="profile-menu" id="profileMenu">
+    <a href="/pages/profile.html">View profile</a>
+    <a href="/pages/parametes.html">Settings</a>
+    <a href="#" id="logoutBtn">Log out</a>
+  </div>
+</header>
+
+<script src="/assets/js/profile-icon.js"></script>
+
+<main>
+  <h1 class="page-title">My Commitments</h1>
+  <p class="page-subtitle">Define personal commitments to stay motivated</p>
+
+  <div class="info-card">
+    <h3>💡 Pourquoi prendre des engagements ?</h3>
+    <p>
+      Les engagements vous aident à clarifier vos intentions et à rester concentré sur ce qui compte vraiment. 
+      Ils transforment vos aspirations en promesses concrètes envers vous-même.
+    </p>
+  </div>
+
+  <div class="add-commitment">
+    <h3>➕ Add a commitment</h3>
+    <div class="input-group">
+      <input 
+        type="text" 
+        id="newCommitment" 
+        placeholder="Ex: I commit to practicing 15 minutes each day..."
+        maxlength="150"
+      >
+      <button id="addBtn">Add</button>
+    </div>
+  </div>
+
+  <section class="commitments-section">
+    <div class="section-header">
+      <h2>My commitments</h2>
+      <span class="count-badge" id="countBadge">0</span>
+    </div>
+    <div class="commitments-list" id="commitmentsList"></div>
+  </section>
+</main>
+
+<script>
+// ============= NAVIGATION =============
+const hamburger = document.getElementById('hamburgerBtn');
+const slideNav = document.getElementById('slideNav');
+const profileBtn = document.getElementById('profileBtn');
+const profileMenu = document.getElementById('profileMenu');
+
+hamburger.onclick = () => slideNav.classList.toggle('active');
+profileBtn.onclick = () => profileMenu.classList.toggle('active');
+
+document.addEventListener('click', e => {
+  if (!slideNav.contains(e.target) && !hamburger.contains(e.target)) {
+    slideNav.classList.remove('active');
+  }
+  if (!profileMenu.contains(e.target) && !profileBtn.contains(e.target)) {
+    profileMenu.classList.remove('active');
+  }
+});
+
+// Logout
+document.getElementById('logoutBtn').onclick = (e) => {
+  e.preventDefault();
+  if (confirm('Are you sure you want to log out?')) {
+    localStorage.clear();
+    window.location.href = 'index.html';
+  }
+};
+
+// Set profile icon
+try {
+  const userName = localStorage.getItem('profileName') || 'User';
+  document.getElementById('profileIcon').textContent = userName.charAt(0).toUpperCase();
+} catch (e) {
+  document.getElementById('profileIcon').textContent = 'U';
+}
+
+// ============= COMMITMENTS MANAGEMENT =============
+const STORAGE_KEY = 'commitments';
+let commitments = [];
+
+const input = document.getElementById('newCommitment');
+const addBtn = document.getElementById('addBtn');
+const listEl = document.getElementById('commitmentsList');
+const countBadge = document.getElementById('countBadge');
+
+// Icons pool
+const icons = ['🎯', '✨', '💪', '🌟', '🚀', '💎', '🔥', '⭐', '🌈', '💫'];
+
+function loadCommitments() {
+  try {
+    commitments = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  } catch (e) {
+    commitments = [];
+  }
+  render();
+}
+
+function saveCommitments() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(commitments));
+}
+
+function render() {
+  listEl.innerHTML = '';
+  countBadge.textContent = commitments.length;
+
+  if (commitments.length === 0) {
+    listEl.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🎯</div>
+        <h3>Aucun engagement pour le moment</h3>
+        <p>Commencez par définir votre premier engagement ci-dessus.<br>
+        Que souhaitez-vous accomplir ?</p>
+      </div>
+    `;
+    return;
+  }
+
+  commitments.forEach((commitment, index) => {
+    const card = document.createElement('div');
+    card.className = 'commitment-card';
+
+    const icon = icons[index % icons.length];
+    const date = new Date(commitment.createdAt);
+    const dateStr = date.toLocaleDateString('fr-FR', { 
+      day: 'numeric', 
+      month: 'long', 
+      year: 'numeric' 
+    });
+
+    card.innerHTML = `
+      <div class="commitment-icon">${icon}</div>
+      <div class="commitment-content">
+        <div class="commitment-text">${commitment.text}</div>
+        <div class="commitment-date">Créé le ${dateStr}</div>
+      </div>
+      <div class="commitment-actions">
+        <button class="btn-action btn-edit" onclick="editCommitment(${index})">✏️</button>
+        <button class="btn-action btn-delete" onclick="deleteCommitment(${index})">🗑️</button>
+      </div>
+    `;
+
+    listEl.appendChild(card);
+  });
+}
+
+function addCommitment() {
+  const text = input.value.trim();
+  
+  if (!text) {
+    alert('⚠️ Veuillez saisir un engagement');
+    return;
+  }
+
+  if (text.length < 10) {
+    alert('⚠️ Votre engagement doit contenir au moins 10 caractères');
+    return;
+  }
+
+  commitments.push({
+    text: text,
+    createdAt: new Date().toISOString()
+  });
+
+  saveCommitments();
+  render();
+  input.value = '';
+  input.focus();
+}
+
+window.editCommitment = function(index) {
+  const newText = prompt('Modifier votre engagement :', commitments[index].text);
+  
+  if (newText === null) return; // Cancelled
+  
+  if (newText.trim().length < 10) {
+    alert('⚠️ Votre engagement doit contenir au moins 10 caractères');
+    return;
+  }
+
+  if (newText.trim()) {
+    commitments[index].text = newText.trim();
+    saveCommitments();
+    render();
+  }
+};
+
+window.deleteCommitment = function(index) {
+  if (confirm('❌ Are you sure you want to delete this commitment?')) {
+    commitments.splice(index, 1);
+    saveCommitments();
+    render();
+  }
+};
+
+// Event listeners
+addBtn.onclick = addCommitment;
+input.onkeydown = (e) => {
+  if (e.key === 'Enter') {
+    addCommitment();
+  }
+};
+
+// ============= INIT =============
+loadCommitments();
+</script>
+
+<!-- Bottom navigation (mobile) -->
+<style>
+  .bottom-nav{position:fixed;left:0;right:0;bottom:0;display:none;background:rgba(255,255,255,0.98);backdrop-filter:blur(8px);border-top:1px solid rgba(43,0,59,0.06);box-shadow:0 -6px 24px rgba(0,0,0,0.08);z-index:1005;padding:env(safe-area-inset-bottom,12px) 12px 12px}
+  .bottom-nav .nav-row{display:flex;gap:6px;justify-content:space-around;align-items:center;max-width:900px;margin:0 auto}
+  .bottom-nav .nav-item{text-decoration:none;color:var(--gray-700);display:flex;flex-direction:column;align-items:center;font-size:0.8rem;gap:4px;padding:8px 6px;border-radius:10px;transition:background .12s,transform .12s}
+  .bottom-nav .nav-item .nav-icon{font-size:1.25rem;line-height:1}
+  .bottom-nav .nav-item.active,.bottom-nav .nav-item:focus,.bottom-nav .nav-item:hover{color:var(--primary-600);transform:translateY(-4px)}
+  @media (max-width:900px){.bottom-nav{display:block}.hamburger{display:none}main{padding-bottom:calc(84px + env(safe-area-inset-bottom))}}
+</style>
+<nav class="bottom-nav" id="bottomNav" role="navigation" aria-label="Bottom navigation">
+  <div class="nav-row">
+    <a href="/pages/dashboard.html" class="nav-item" data-key="dashboard" aria-label="Dashboard"><div class="nav-icon"><i class="fi fi-rr-dashboard"></i></div><div class="nav-label">Dashboard</div></a>
+    <a href="/pages/profile.html" class="nav-item" data-key="profile" aria-label="Profile"><div class="nav-icon" id="bottomProfileIcon"></div><div class="nav-label">Profile</div></a>
+    <a href="/pages/commitmentpage.html" class="nav-item" data-key="commitments" aria-label="Commitments"><div class="nav-icon"><i class="fi fi-rr-diploma"></i></div><div class="nav-label">Commitments</div></a>
+    <a href="/pages/statistics.html" class="nav-item" data-key="statistics" aria-label="Statistics"><div class="nav-icon"><i class="fi fi-rr-chart-pie"></i></div><div class="nav-label">Stats</div></a>
+    <a href="/pages/parametes.html" class="nav-item" data-key="settings" aria-label="Settings"><div class="nav-icon"><i class="fi fi-rr-settings"></i></div><div class="nav-label">Settings</div></a>
+  </div>
+</nav>
+<script>
+  (function(){
+    const path=window.location.pathname||'';
+    const map={'/pages/dashboard.html':'dashboard','/pages/profile.html':'profile','/pages/commitmentpage.html':'commitments','/pages/statistics.html':'statistics','/pages/parametes.html':'settings'};
+    const key=map[path]||Object.keys(map).find(k=>path.endsWith(k.split('/').pop()))||'dashboard';
+    document.querySelectorAll('.bottom-nav .nav-item').forEach(item=>{if(item.dataset.key===key)item.classList.add('active')});
+    try{const h=document.getElementById('profileIcon'),b=document.getElementById('bottomProfileIcon');if(h&&b){b.innerHTML=h.innerHTML}}catch(e){}
+  })();
+</script>
+</body>
+</html>

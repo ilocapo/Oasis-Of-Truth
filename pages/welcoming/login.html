@@ -12,12 +12,12 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 	<!-- Flaticon Uicons (local + CDN families) -->
 	<link href="../../assets/vendor/uicons/uicons-rounded-regular.css" rel="stylesheet">
-	<link rel="stylesheet" href="/assets/vendor/uicons/uicons-regular-rounded.css">
-	<link rel="stylesheet" href="/assets/vendor/uicons/uicons-regular-straight.css">
-	<link rel="stylesheet" href="/assets/vendor/uicons/uicons-solid-rounded.css">
-	<link rel="stylesheet" href="/assets/vendor/uicons/uicons-solid-straight.css">
-	<link rel="stylesheet" href="/assets/vendor/uicons/uicons-thin-rounded.css">
-	<link rel="stylesheet" href="/assets/vendor/uicons/uicons-brands.css">
+	<link rel="stylesheet" href="../../assets/vendor/uicons/uicons-regular-rounded.css">
+	<link rel="stylesheet" href="../../assets/vendor/uicons/uicons-regular-straight.css">
+	<link rel="stylesheet" href="../../assets/vendor/uicons/uicons-solid-rounded.css">
+	<link rel="stylesheet" href="../../assets/vendor/uicons/uicons-solid-straight.css">
+	<link rel="stylesheet" href="../../assets/vendor/uicons/uicons-thin-rounded.css">
+	<link rel="stylesheet" href="../../assets/vendor/uicons/uicons-brands.css">
 	<link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -107,17 +107,17 @@
 </style>
 <nav class="bottom-nav" id="bottomNav" role="navigation" aria-label="Bottom navigation">
 	<div class="nav-row">
-		<a href="/pages/dashboard.html" class="nav-item" data-key="dashboard" aria-label="Dashboard"><div class="nav-icon"><i class="fi fi-rr-dashboard"></i></div><div class="nav-label">Dashboard</div></a>
-		<a href="/pages/profile.html" class="nav-item" data-key="profile" aria-label="Profile"><div class="nav-icon" id="bottomProfileIcon"></div><div class="nav-label">Profile</div></a>
-		<a href="/pages/commitmentpage.html" class="nav-item" data-key="commitments" aria-label="Commitments"><div class="nav-icon"><i class="fi fi-rr-diploma"></i></div><div class="nav-label">Commitments</div></a>
-		<a href="/pages/statistics.html" class="nav-item" data-key="statistics" aria-label="Statistics"><div class="nav-icon"><i class="fi fi-rr-chart-pie"></i></div><div class="nav-label">Stats</div></a>
-		<a href="/pages/parametes.html" class="nav-item" data-key="settings" aria-label="Settings"><div class="nav-icon"><i class="fi fi-rr-settings"></i></div><div class="nav-label">Settings</div></a>
+		<a href="../dashboard.html" class="nav-item" data-key="dashboard" aria-label="Dashboard"><div class="nav-icon"><i class="fi fi-rr-dashboard"></i></div><div class="nav-label">Dashboard</div></a>
+		<a href="../profile.html" class="nav-item" data-key="profile" aria-label="Profile"><div class="nav-icon" id="bottomProfileIcon"></div><div class="nav-label">Profile</div></a>
+		<a href="../commitmentpage.html" class="nav-item" data-key="commitments" aria-label="Commitments"><div class="nav-icon"><i class="fi fi-rr-diploma"></i></div><div class="nav-label">Commitments</div></a>
+		<a href="../statistics.html" class="nav-item" data-key="statistics" aria-label="Statistics"><div class="nav-icon"><i class="fi fi-rr-chart-pie"></i></div><div class="nav-label">Stats</div></a>
+		<a href="../parametes.html" class="nav-item" data-key="settings" aria-label="Settings"><div class="nav-icon"><i class="fi fi-rr-settings"></i></div><div class="nav-label">Settings</div></a>
 	</div>
 </nav>
 <script>
 	(function(){
 		const path=window.location.pathname||'';
-		const map={'/pages/dashboard.html':'dashboard','/pages/profile.html':'profile','/pages/commitmentpage.html':'commitments','/pages/statistics.html':'statistics','/pages/parametes.html':'settings'};
+		const map={'../dashboard.html':'dashboard','../profile.html':'profile','../commitmentpage.html':'commitments','../statistics.html':'statistics','../parametes.html':'settings'};
 		const key=map[path]||Object.keys(map).find(k=>path.endsWith(k.split('/').pop()))||'dashboard';
 		document.querySelectorAll('.bottom-nav .nav-item').forEach(item=>{if(item.dataset.key===key)item.classList.add('active')});
 		try{const h=document.getElementById('profileIcon'),b=document.getElementById('bottomProfileIcon');if(h&&b){b.innerHTML=h.innerHTML}}catch(e){}

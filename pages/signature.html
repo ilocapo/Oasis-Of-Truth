@@ -570,10 +570,10 @@ submitBtn.addEventListener('click', function() {
     // Show success overlay
     successOverlay.classList.add('active');
     
-    // Redirect to onboarding after animation (root onboarding.html)
+    // Redirect to onboarding after animation
     setTimeout(() => {
-        // onboarding.html is in the parent `pages/` folder
-        window.location.href = '../onboarding.html';
+        // onboarding.html is in the same `pages/` folder
+        window.location.href = 'onboarding.html';
     }, 2500);
 });
 

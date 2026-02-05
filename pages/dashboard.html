@@ -6,21 +6,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#2b003b">
-  <title>Dashboard - Oasis of Truth</title>
+<title>Dashboard - Oasis of Truth</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Crimson+Text:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Fira+Code:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Flaticon Uicons (local) -->
-  <link rel="stylesheet" href="../assets/vendor/uicons/uicons-rounded-regular.css">
-  <link rel="stylesheet" href="../assets/vendor/uicons/uicons-regular-rounded.css">
-  <link rel="stylesheet" href="../assets/vendor/uicons/uicons-regular-straight.css">
-  <link rel="stylesheet" href="../assets/vendor/uicons/uicons-solid-rounded.css">
-  <link rel="stylesheet" href="../assets/vendor/uicons/uicons-solid-straight.css">
-  <link rel="stylesheet" href="../assets/vendor/uicons/uicons-thin-rounded.css">
-  <link rel="stylesheet" href="../assets/vendor/uicons/uicons-brands.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
 <style>
-  :root {
+:root {
   --violet-500: #2b003b;
   --violet-600: #3e1a57;
   --violet-700: #2a0032;
@@ -36,11 +29,6 @@
   --green-100: #d1fae5;
   --amber-500: #f59e0b;
   --amber-100: #fef3c7;
-  
-  /* Font families */
-  --font-body: 'Inter', sans-serif;
-  --font-heading: 'Playfair Display', serif;
-  --font-mono: 'Fira Code', monospace;
 }
 
 /* ================= GLOBAL ================= */
@@ -811,9 +799,6 @@ main {
   z-index: 1;
 }
 
-.aristotle-wrap{margin-top:10px}
-.aristotle-img{width:84px;height:84px;border-radius:50%;object-fit:cover;display:block;margin:10px auto;border:3px solid var(--violet-100)}
-
 .quote-author {
   font-size: 0.9rem;
   opacity: 0.9;
@@ -944,82 +929,34 @@ main {
   }
 }
 </style>
-<script>
-// ============= THEME MANAGEMENT =============
-// Complete theme definitions with colors and fonts
-const themeDefinitions = {
-  default: { colors: {}, fonts: { body: "'Inter', sans-serif", heading: "'Playfair Display', serif" } },
-  olive: { colors: { primary500: '#6B8E23', primary600: '#556B2F', primary700: '#3D4F1F', primary100: '#F4EFE6', primary50: '#FAFAF7', gray900: '#2F2F2F', gray700: '#4A4A4A', gray600: '#5F5F5F', gray500: '#757575' }, fonts: { body: "'Crimson Text', serif", heading: "'Playfair Display', serif" }, background: 'linear-gradient(180deg, #FAFAF7, #F4EFE6)' },
-  japan: { colors: { primary500: '#1F1F1F', primary600: '#0D0D0D', primary700: '#000000', primary100: '#F5F5F5', primary50: '#FFFFFF', gray900: '#0D0D0D', gray700: '#2F2F2F', gray600: '#4A4A4A', gray500: '#757575' }, fonts: { body: "'Noto Sans JP', sans-serif", heading: "'Zen Kaku Gothic New', sans-serif" }, background: 'linear-gradient(180deg, #FFFFFF, #F5F5F5)' },
-  pixel: { colors: { primary500: '#00FF00', primary600: '#00DD00', primary700: '#00BB00', primary100: '#E6FFE6', primary50: '#F2FFF2', gray900: '#000000', gray700: '#1F1F1F', gray600: '#3F3F3F', gray500: '#5F5F5F' }, fonts: { body: "'JetBrains Mono', monospace", heading: "'Fira Code', monospace" }, background: 'linear-gradient(180deg, #000000, #0F0F0F)' }
-};
-
-function applyTheme() {
-  const theme = localStorage.getItem('colorTheme') || 'default';
-  const dark = localStorage.getItem('darkMode') === '1';
-  const themeClasses = ['theme-ocean', 'theme-forest', 'theme-sunset', 'theme-rose', 'theme-midnight', 'theme-japan', 'theme-pixel', 'theme-winter', 'theme-summer', 'theme-olive'];
-  document.body.classList.remove(...themeClasses);
-  
-  if (theme !== 'default') {
-    document.body.classList.add('theme-' + theme);
-  }
-  
-  // Apply theme-specific styles
-  const root = document.documentElement;
-  const themeDef = themeDefinitions[theme];
-  if (themeDef) {
-    // Apply colors
-    if (themeDef.colors.primary500) root.style.setProperty('--violet-500', themeDef.colors.primary500);
-    if (themeDef.colors.primary600) root.style.setProperty('--violet-600', themeDef.colors.primary600);
-    if (themeDef.colors.primary700) root.style.setProperty('--violet-700', themeDef.colors.primary700);
-    if (themeDef.colors.primary100) root.style.setProperty('--violet-100', themeDef.colors.primary100);
-    if (themeDef.colors.primary50) root.style.setProperty('--violet-50', themeDef.colors.primary50);
-    
-    // Apply fonts
-    root.style.setProperty('--font-body', themeDef.fonts.body);
-    root.style.setProperty('--font-heading', themeDef.fonts.heading);
-    document.body.style.fontFamily = themeDef.fonts.body;
-    
-    // Apply background if specified
-    if (themeDef.background) {
-      document.body.style.background = themeDef.background;
-    }
-  }
-  
-  document.body.classList.toggle('dark-theme', dark);
-}
-
-document.addEventListener('DOMContentLoaded', applyTheme);
-</script>
 </head>
 <body>
 
 <header class="app-header">
   <button class="hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
   <div class="header-title">Oasis of Truth</div>
-  <a class="profile-btn" id="profileBtn" href="profile.html" aria-label="My profile">
+  <a class="profile-btn" id="profileBtn" href="../profile.html" aria-label="My profile">
     <div class="profile-icon" id="profileIcon">U</div>
   </a>
 
   <nav class="slide-nav" id="slideNav">
     <ul>
-      <li><a href="dashboard.html">📊 Dashboard</a></li>
-      <li><a href="profile.html">👤 My profile</a></li>
-      <li><a href="commitmentpage.html">🎯 My commitments</a></li>
-      <li><a href="statistics.html">📈 Statistics</a></li>
-      <li><a href="parametes.html">⚙️ Settings</a></li>
+      <li><a href="../dashboard.html">📊 Dashboard</a></li>
+      <li><a href="../profile.html">👤 My profile</a></li>
+      <li><a href="../commitmentpage.html">🎯 My commitments</a></li>
+      <li><a href="../statistics.html">📈 Statistics</a></li>
+      <li><a href="../parametes.html">⚙️ Settings</a></li>
     </ul>
   </nav>
 
   <div class="profile-menu" id="profileMenu">
-    <a href="profile.html">View profile</a>
-    <a href="parametes.html">Settings</a>
+    <a href="../profile.html">View profile</a>
+    <a href="../parametes.html">Settings</a>
     <a href="#" onclick="localStorage.clear();location.reload();return false;">Log out</a>
   </div>
 </header>
-
-<script src="../assets/js/profile-icon.js"></script>
-
+ 
+<script src="/assets/js/profile-icon.js"></script>
 <main>
   <section class="welcome">
     <div class="welcome-badge">
@@ -1028,9 +965,6 @@ document.addEventListener('DOMContentLoaded', applyTheme);
     </div>
     <h1>Welcome to your Oasis</h1>
     <p>Build your habits, 15 minutes at a time</p>
-    <div class="aristotle-wrap">
-      <img src="/aristote.jpeg" alt="Aristotle" class="aristotle-img">
-    </div>
   </section>
 
   <div class="stats-bar">
@@ -1089,13 +1023,13 @@ document.addEventListener('DOMContentLoaded', applyTheme);
 
   <div class="start-section">
     <button id="startSessionBtn" class="btn-start" disabled>
-      ⏱️ Start 15-minute session
+      ⏱️ Start my 15-minute session
     </button>
   </div>
 
   <!-- Progress Chart Section -->
   <section class="progress-section">
-      <div class="section-header">
+    <div class="section-header">
       <h2>7-Day Progress</h2>
     </div>
     <div class="progress-chart-card">
@@ -1106,7 +1040,7 @@ document.addEventListener('DOMContentLoaded', applyTheme);
   <!-- Recent Activity Section -->
   <section class="activity-section">
     <div class="section-header">
-      <h2>Activité récente</h2>
+      <h2>Recent activity</h2>
     </div>
     <div class="activity-list" id="activityList"></div>
   </section>
@@ -1142,27 +1076,10 @@ document.addEventListener('DOMContentLoaded', applyTheme);
 
     <div class="modal-actions">
       <button class="btn-secondary" id="cancelBtn">Cancel</button>
-      <button class="btn-secondary" id="audioToggle">🔈</button>
       <button class="btn-done" id="doneBtn">✓ Finish</button>
     </div>
   </div>
 </div>
-
-<!-- Pledge modal shown when adding a new habit -->
-<div class="modal" id="pledgeModal">
-  <div class="modal-content">
-    <h3>Make a commitment</h3>
-    <div id="pledgeText" style="margin-bottom:12px;color:var(--gray-700);"></div>
-    <input id="pledgeName" placeholder="Type your name to sign (e.g., Ilona)" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--gray-300);margin-bottom:12px">
-    <div style="display:flex;gap:8px;justify-content:flex-end">
-      <button class="btn-secondary" id="pledgeCancel">Cancel</button>
-      <button class="btn-done" id="pledgeSign">Sign and commit</button>
-    </div>
-  </div>
-</div>
-
-<!-- Background audio for timer -->
-<audio id="bgAudio" loop src="../assets/Where-The-Waves-Take-Us(chosic.com).mp3"></audio>
 
 <script>
 // ============= NAVIGATION =============
@@ -1214,7 +1131,7 @@ document.addEventListener('click', e => {
     'Drawing / Creativity',
     'Writing',
     'Physical exercise',
-    'Day planning'
+    'Daily planning'
   ];
 
   // ============= LOAD & SAVE =============
@@ -1275,9 +1192,9 @@ document.addEventListener('click', e => {
 
       let badgeHTML = '';
       if (isLocked) {
-        badgeHTML = `<span class="habit-badge">🔒 Locked</span>`;
+        badgeHTML = `<span class="habit-badge">🔒 Verrouillée</span>`;
       } else if (isSelected) {
-        badgeHTML = `<span class="habit-badge">✓ Selected</span>`;
+        badgeHTML = `<span class="habit-badge">✓ Sélectionnée</span>`;
       }
 
       let lockMessageHTML = '';
@@ -1285,7 +1202,7 @@ document.addEventListener('click', e => {
         const daysNeeded = 15 - streak;
         lockMessageHTML = `
           <div class="lock-message">
-            🔐 Only ${daysNeeded} more day${daysNeeded > 1 ? 's' : ''} to unlock
+            🔐 ${daysNeeded} day${daysNeeded > 1 ? 's' : ''} of streak left to unlock
           </div>
         `;
       }
@@ -1297,7 +1214,7 @@ document.addEventListener('click', e => {
           </div>
           ${badgeHTML}
         </div>
-            <div class="habit-stats">
+        <div class="habit-stats">
           <div class="habit-stat">
             <span>🔥</span>
             <span><strong>${habit.streak || 0}</strong> days</span>
@@ -1382,25 +1299,38 @@ document.addEventListener('click', e => {
 
   function addHabit(name) {
     if (!name || name.trim() === '') return;
-
+    
     const canAddHabit = habits.length === 0 || streak >= 15;
     if (!canAddHabit) {
       alert('Reach a 15-day streak to unlock a new habit! 💪');
       return;
     }
 
-    const alreadyExists = habits.some(h => h.name.toLowerCase() === name.trim().toLowerCase());
+    const alreadyExists = habits.some(h => 
+      h.name.toLowerCase() === name.trim().toLowerCase()
+    );
+
     if (alreadyExists) {
       alert('This habit already exists! 😊');
       return;
     }
 
-    // Show pledge modal to have user sign the commitment
-    pendingHabit = name.trim();
-    const pledgeText = `I commit to practicing <strong>${pendingHabit}</strong> 1 minute per day.`;
-    document.getElementById('pledgeText').innerHTML = pledgeText;
-    document.getElementById('pledgeName').value = localStorage.getItem('profileName') || '';
-    document.getElementById('pledgeModal').classList.add('active');
+    habits.push({
+      name: name.trim(),
+      streak: 0,
+      completedCount: 0,
+      createdAt: new Date().toISOString()
+    });
+
+    // Auto-select if it's the first habit
+    if (habits.length === 1) {
+      selectedIndex = 0;
+    }
+
+    saveData();
+    render();
+    newHabitInput.value = '';
+    newHabitInput.focus();
   }
 
   addHabitBtn.onclick = () => addHabit(newHabitInput.value);
@@ -1408,40 +1338,6 @@ document.addEventListener('click', e => {
     if (e.key === 'Enter') {
       addHabitBtn.click();
     }
-  };
-
-  // Pending habit from pledge flow
-  let pendingHabit = null;
-
-  // Pledge modal actions
-  const pledgeModal = document.getElementById('pledgeModal');
-  const pledgeSign = document.getElementById('pledgeSign');
-  const pledgeCancel = document.getElementById('pledgeCancel');
-
-  pledgeCancel.onclick = () => {
-    pendingHabit = null;
-    pledgeModal.classList.remove('active');
-  };
-
-  pledgeSign.onclick = () => {
-    const signer = document.getElementById('pledgeName').value.trim() || localStorage.getItem('profileName') || 'You';
-    if (!pendingHabit) return;
-
-    // create commitment
-    const commitments = JSON.parse(localStorage.getItem('commitments') || '[]');
-    commitments.push({ text: `I commit to practicing ${pendingHabit} — signed by ${signer}`, createdAt: new Date().toISOString(), habitName: pendingHabit });
-    localStorage.setItem('commitments', JSON.stringify(commitments));
-
-    // add to habits
-    habits.push({ name: pendingHabit, streak: 0, completedCount: 0, createdAt: new Date().toISOString() });
-    if (habits.length === 1) selectedIndex = 0;
-    saveData();
-    render();
-
-    pendingHabit = null;
-    pledgeModal.classList.remove('active');
-    newHabitInput.value = '';
-    newHabitInput.focus();
   };
 
   // ============= TIMER =============
@@ -1474,15 +1370,6 @@ document.addEventListener('click', e => {
     timerDisplay.textContent = formatTime(remainingSeconds);
     progressBar.style.width = '100%';
 
-    // start background audio if not muted
-    try {
-      if (bgAudio && !audioMuted) {
-        bgAudio.currentTime = 0;
-        const playPromise = bgAudio.play();
-        if (playPromise && playPromise.then) playPromise.catch(() => {});
-      }
-    } catch (e) {}
-
     timerInterval = setInterval(() => {
       remainingSeconds--;
       timerDisplay.textContent = formatTime(remainingSeconds);
@@ -1502,13 +1389,10 @@ document.addEventListener('click', e => {
       timerInterval = null;
     }
     modal.classList.remove('active');
-    try { if (bgAudio) { bgAudio.pause(); bgAudio.currentTime = 0; } } catch (e) {}
   }
 
   function completeSession() {
     stopTimer();
-
-    try { if (bgAudio) { bgAudio.pause(); bgAudio.currentTime = 0; } } catch (e) {}
 
     // Update stats
     completed++;
@@ -1572,33 +1456,6 @@ document.addEventListener('click', e => {
   startBtn.onclick = startTimer;
   cancelBtn.onclick = stopTimer;
   doneBtn.onclick = completeSession;
-
-  // ============= AUDIO (timer ambience) =============
-  const bgAudio = document.getElementById('bgAudio');
-  const audioToggleBtn = document.getElementById('audioToggle');
-  let audioMuted = localStorage.getItem('audioMuted') === '1';
-
-  function updateAudioButton() {
-    audioToggleBtn.textContent = audioMuted ? '🔈' : '🔊';
-  }
-
-  // initialize audio element
-  try {
-    bgAudio.muted = audioMuted;
-    updateAudioButton();
-  } catch (e) {
-    console.warn('Audio element not found or cannot be initialized');
-  }
-
-  audioToggleBtn.onclick = () => {
-    audioMuted = !audioMuted;
-    localStorage.setItem('audioMuted', audioMuted ? '1' : '0');
-    if (bgAudio) bgAudio.muted = audioMuted;
-    updateAudioButton();
-    if (audioMuted) {
-      try { bgAudio.pause(); bgAudio.currentTime = 0; } catch (e) {}
-    }
-  };
 
   // ============= INIT =============
   loadData();
@@ -1720,10 +1577,10 @@ document.addEventListener('click', e => {
     { text: "Discipline is the bridge between goals and accomplishment.", author: "Jim Rohn" },
     { text: "A journey of a thousand miles begins with a single step.", author: "Lao Tzu" },
     { text: "Success is the sum of small efforts repeated day in and day out.", author: "Robert Collier" },
-    { text: "We are what we repeatedly do. Excellence, then, is not an act, but a habit.", author: "Aristotle" },
-    { text: "Motivation gets you started. Habit keeps you going.", author: "Jim Ryun" },
-    { text: "Each day is a new opportunity to become better.", author: "Anonymous" },
-    { text: "Small daily actions create big changes.", author: "Robin Sharma" },
+    { text: "We are what we repeatedly do. Excellence, then, is not an act but a habit.", author: "Aristotle" },
+    { text: "Motivation gets you going, habit keeps you going.", author: "Jim Ryun" },
+    { text: "Every day is a new opportunity to get better.", author: "Anonymous" },
+    { text: "Small daily actions create big changes over time.", author: "Robin Sharma" },
     { text: "Consistency is the key to mastery.", author: "Bruce Lee" },
     { text: "Don't count the days, make the days count.", author: "Muhammad Ali" },
     { text: "The secret of getting ahead is getting started.", author: "Mark Twain" }
@@ -1738,14 +1595,14 @@ document.addEventListener('click', e => {
   // ============= ACHIEVEMENTS =============
   const achievements = [
     { id: 'first_session', icon: '🌱', title: 'First Step', desc: 'First session completed', unlockCondition: () => completed >= 1 },
-    { id: 'streak_3', icon: '🔥', title: 'On Track!', desc: '3 days in a row', unlockCondition: () => streak >= 3 },
-    { id: 'streak_7', icon: '⭐', title: 'One Week!', desc: '7 days in a row', unlockCondition: () => streak >= 7 },
-    { id: 'streak_15', icon: '💎', title: 'Diamond', desc: '15 days in a row', unlockCondition: () => streak >= 15 },
+    { id: 'streak_3', icon: '🔥', title: 'On the way!', desc: '3 days in a row', unlockCondition: () => streak >= 3 },
+    { id: 'streak_7', icon: '⭐', title: 'One week!', desc: '7 days in a row', unlockCondition: () => streak >= 7 },
+    { id: 'streak_15', icon: '💎', title: 'Gem', desc: '15 days in a row', unlockCondition: () => streak >= 15 },
     { id: 'streak_30', icon: '👑', title: 'Champion', desc: '30 days in a row', unlockCondition: () => streak >= 30 },
     { id: 'sessions_10', icon: '💪', title: 'Persistent', desc: '10 total sessions', unlockCondition: () => completed >= 10 },
     { id: 'sessions_50', icon: '🚀', title: 'Determined', desc: '50 total sessions', unlockCondition: () => completed >= 50 },
-    { id: 'hours_5', icon: '⏰', title: '5 Hours', desc: '5h invested', unlockCondition: () => totalMinutes >= 300 },
-    { id: 'two_habits', icon: '🎯', title: 'Multi-habit', desc: '2 active habits', unlockCondition: () => habits.length >= 2 },
+    { id: 'hours_5', icon: '⏰', title: '5 hours', desc: '5 hours invested', unlockCondition: () => totalMinutes >= 300 },
+    { id: 'two_habits', icon: '🎯', title: 'Two habits', desc: '2 active habits', unlockCondition: () => habits.length >= 2 },
   ];
 
   function renderAchievements() {
@@ -1811,11 +1668,11 @@ document.addEventListener('click', e => {
 </style>
 <nav class="bottom-nav" id="bottomNav" role="navigation" aria-label="Bottom navigation">
   <div class="nav-row">
-    <a href="dashboard.html" class="nav-item" data-key="dashboard" aria-label="Dashboard"><div class="nav-icon"><i class="fi fi-rr-dashboard"></i></div><div class="nav-label">Dashboard</div></a>
-    <a href="profile.html" class="nav-item" data-key="profile" aria-label="Profile"><div class="nav-icon" id="bottomProfileIcon"></div><div class="nav-label">Profile</div></a>
-    <a href="commitmentpage.html" class="nav-item" data-key="commitments" aria-label="Commitments"><div class="nav-icon"><i class="fi fi-rr-diploma"></i></div><div class="nav-label">Commitments</div></a>
-    <a href="statistics.html" class="nav-item" data-key="statistics" aria-label="Statistics"><div class="nav-icon"><i class="fi fi-rr-chart-pie"></i></div><div class="nav-label">Stats</div></a>
-    <a href="parametes.html" class="nav-item" data-key="settings" aria-label="Settings"><div class="nav-icon"><i class="fi fi-rr-settings"></i></div><div class="nav-label">Settings</div></a>
+    <a href="../dashboard.html" class="nav-item" data-key="dashboard" aria-label="Dashboard"><div class="nav-icon"><i class="fi fi-rr-dashboard"></i></div><div class="nav-label">Dashboard</div></a>
+    <a href="../profile.html" class="nav-item" data-key="profile" aria-label="Profile"><div class="nav-icon" id="bottomProfileIcon"></div><div class="nav-label">Profile</div></a>
+    <a href="../commitmentpage.html" class="nav-item" data-key="commitments" aria-label="Commitments"><div class="nav-icon"><i class="fi fi-rr-diploma"></i></div><div class="nav-label">Commitments</div></a>
+    <a href="../statistics.html" class="nav-item" data-key="statistics" aria-label="Statistics"><div class="nav-icon"><i class="fi fi-rr-chart-pie"></i></div><div class="nav-label">Stats</div></a>
+    <a href="../parametes.html" class="nav-item" data-key="settings" aria-label="Settings"><div class="nav-icon"><i class="fi fi-rr-settings"></i></div><div class="nav-label">Settings</div></a>
   </div>
 </nav>
 <script>

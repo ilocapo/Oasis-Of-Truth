@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="fr">
 <head>
 	<meta charset="utf-8">
@@ -142,5 +141,139 @@ Oasis of Truth is a PWA that guides you through reflections and commitments to h
 <footer>
 <p>&copy; 2026 Oasis of Truth. All rights reserved.</p>
 </footer>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Oasis of Truth</title>
+	<meta name="theme-color" content="#2b003b">
+	<script>
+		// Redirect policy:
+		// - first visit (no localStorage.hasVisited) -> onboarding welcoming dashboard
+		// - otherwise -> if localStorage.hasAccount === '1' -> login, else -> signup
+		(function(){
+			try{
+				const visited = localStorage.getItem('hasVisited');
+				if(!visited){
+					localStorage.setItem('hasVisited','1');
+					window.location.replace('pages/welcoming/dashboard.html');
+					return;
+				}
+				const hasAccount = localStorage.getItem('hasAccount');
+				if(hasAccount === '1'){
+					window.location.replace('pages/login.html');
+				} else {
+					window.location.replace('pages/signup.html');
+				}
+			}catch(e){
+				// if anything goes wrong, fall back to onboarding
+				try{ window.location.replace('pages/welcoming/dashboard.html'); }catch(_){}
+			}
+		})();
+	</script>
+	<!-- Flaticon Uicons (installed via npm) -->
+	<link href="assets/vendor/uicons/uicons-rounded-regular.css" rel="stylesheet">
+	<link rel="stylesheet" href="assets/vendor/uicons/uicons-regular-rounded.css">
+	<link rel="stylesheet" href="assets/vendor/uicons/uicons-regular-straight.css">
+	<link rel="stylesheet" href="assets/vendor/uicons/uicons-solid-rounded.css">
+	<link rel="stylesheet" href="assets/vendor/uicons/uicons-solid-straight.css">
+	<link rel="stylesheet" href="assets/vendor/uicons/uicons-thin-rounded.css">
+	<link rel="stylesheet" href="assets/vendor/uicons/uicons-brands.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+	<noscript>
+		<p>Auto-redirect: <a href="pages/welcoming/dashboard.html">Go to onboarding</a> | <a href="pages/welcoming/login.html">Sign in</a> | <a href="pages/welcoming/signup.html">Sign up</a></p>
+	</noscript>
+	<!-- Reusable app header -->
+	<header class="app-header">
+		<button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+			<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+				<path d="M3 7h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				<path d="M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				<path d="M3 17h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+			</svg>
+		</button>
+		<div class="header-title">Oasis of Truth</div>
+		<div class="header-actions">
+			<button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme">
+				<!-- simple moon/sun icon that will be swapped by JS -->
+				<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+					<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor" />
+				</svg>
+			</button>
+			<button class="profile-btn" id="profileBtn" aria-label="Open profile">
+				<svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+					<circle cx="12" cy="8" r="3.2" fill="currentColor" />
+					<path d="M4.5 20a7.5 7.5 0 0115 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</button>
+		</div>
+		<nav class="slide-nav" id="slideNav" aria-hidden="true">
+			<ul>
+				<li><a data-href="pages/dashboard.html">Dashboard</a></li>
+				<li><a data-href="pages/profile.html">Profile</a></li>
+				<li><a data-href="pages/commitmentpage.html">Commitment</a></li>
+				<li><a data-href="pages/welcoming/signup.html">Sign up</a></li>
+				<li><a data-href="pages/welcoming/login.html">Log in</a></li>
+				<li><a data-href="index.html">Home</a></li>
+			</ul>
+		</nav>
+		<div class="profile-menu" id="profileMenu" aria-hidden="true">
+			<a data-href="pages/profile.html">View Profile</a>
+			<a data-href="pages/welcoming/login.html">Log out</a>
+		</div>
+	</header>
+	<script>
+		(function(){
+			const prefix = location.pathname.includes('/pages/') ? '../' : '';
+			document.querySelectorAll('.app-header [data-href]').forEach(a => {
+				const target = a.dataset.href || '';
+				a.href = target.startsWith('/') ? target.slice(1) : prefix + target;
+			});
+			const hamburger = document.getElementById('hamburgerBtn');
+			const slideNav = document.getElementById('slideNav');
+			const profileBtn = document.getElementById('profileBtn');
+			const profileMenu = document.getElementById('profileMenu');
+			if(hamburger) hamburger.addEventListener('click', ()=>{ const open = slideNav.classList.toggle('active'); slideNav.setAttribute('aria-hidden', String(!open)); });
+			if(profileBtn) profileBtn.addEventListener('click', ()=>{ const open = profileMenu.classList.toggle('active'); profileMenu.setAttribute('aria-hidden', String(!open)); });
+			document.addEventListener('click', (e)=>{
+				if(slideNav && hamburger && !slideNav.contains(e.target) && !hamburger.contains(e.target)) { slideNav.classList.remove('active'); slideNav.setAttribute('aria-hidden','true'); }
+				if(profileMenu && profileBtn && !profileMenu.contains(e.target) && !profileBtn.contains(e.target)) { profileMenu.classList.remove('active'); profileMenu.setAttribute('aria-hidden','true'); }
+			});
+		})();
+	</script>
+	<!-- Theme toggle script -->
+	<script src="assets/js/theme-toggle.js"></script>
+	<!-- Profile icon script -->
+	<script src="assets/js/profile-icon.js"></script>
+	<main class="home-page">
+		<h2>Shape your future in 15 minutes</h2>
+		<div class="card description">
+			<p>
+				Oasis of Truth is a PWA that guides you through reflections and commitments to help you shape your life, in just a few minutes a day. Discover tools inspired by philosophy and positive psychology to move confidently toward your goals.
+			</p>
+		</div>
+		<div class="hero-image">
+			<img src="aristote.jpeg" id="aristote-img" alt="Aristotle">
+		</div>
+		<div class="card features">
+			<h3>Why Oasis of Truth?</h3>
+			<ul>
+				<li>Short and effective exercises for daily progress</li>
+				<li>A personal space to track your commitments</li>
+				<li>Inspirations from great thinkers</li>
+			</ul>
+		</div>
+		<div class="cta">
+			<a href="description.html" id="start">Discover the app</a>
+		</div>
+	</main>
+	<footer>
+		<p>&copy; 2026 Oasis of Truth. All rights reserved.</p>
+	</footer>
 </body>
 </html>
